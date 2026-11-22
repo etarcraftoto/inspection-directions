@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電器承裝業／電機技師專用｜台電新增設用電報竣工指南與自主勾稽系統</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts: Inter & Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Inter"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#0F172A',
+              primary: '#0369A1',
+              light: '#E0F2FE',
+              accent: '#F59E0B',
+              emerald: '#059669'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --base-font-size: 18.5px;
+      --print-font-size: 12pt;
+    }
+
+    html {
+      font-size: var(--base-font-size);
+    }
+
+    body {
+      font-family: 'Noto Sans TC', 'Inter', sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+      line-height: 1.7;
+      letter-spacing: 0.015em;
+    }
+
+    /* 強制將原本偏小的固定像素或小字級轉為隨根元素等比例放大，消除閱讀吃力問題 */
+    .text-\[11px\], .text-\[10px\], .text-\[9\.5pt\], .text-\[10pt\] {
+      font-size: 0.85rem !important;
+      line-height: 1.55 !important;
+    }
+    .text-xs {
+      font-size: 0.92rem !important;
+      line-height: 1.65 !important;
+    }
+    .text-sm {
+      font-size: 1rem !important;
+      line-height: 1.7 !important;
+    }
+    .text-base {
+      font-size: 1.12rem !important;
+      line-height: 1.7 !important;
+    }
+    .text-lg {
+      font-size: 1.25rem !important;
+      line-height: 1.6 !important;
+    }
+    .text-xl {
+      font-size: 1.4rem !important;
+      line-height: 1.5 !important;
+    }
+
+    /* 提升淺灰字對比度，讓法規條文更清晰銳利 */
+    .text-slate-400 {
+      color: #475569 !important;
+    }
+    .text-slate-500 {
+      color: #334155 !important;
+    }
+
+    /* 手風琴展開動畫輔助 */
+    .detail-drawer {
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* 列印專用 A4 樣式：隱藏所有網頁操作介面，僅輸出乾淨的業者自主勾稽表，並支援列印字級調整 */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+      html {
+        font-size: var(--print-font-size) !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: var(--print-font-size) !important;
+        line-height: 1.55 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-only-container {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .print-break-inside-avoid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .print-table th, .print-table td {
+        border: 1px solid #000000 !important;
+        padding: 6px 8px !important;
+        font-size: var(--print-font-size) !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- 頂部導覽標題列 (列印時隱藏) -->
+  <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-lg shadow">
+          <i class="fa-solid fa-helmet-safety"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs px-2 py-0.5 rounded font-semibold">電器承裝業／電機技師專用視角</span>
+            <h1 class="text-base sm:text-lg font-bold tracking-wide">台電新增設用電設備「報竣工指南與自主勾稽系統」</h1>
+          </div>
+          <p class="text-xs text-slate-300 mt-0.5">依115年10月1日修正「新增設用戶用電設備檢驗要點」編製｜架構式總覽・細節點開再看・一鍵轉出勾稽表</p>
+        </div>
+      </div>
+
+      <!-- 右側：字體大小自由調整器 ＋ 業者勾稽進度與快捷列印 -->
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- 護眼字體大小調整工具列 -->
+        <div class="bg-slate-800 px-3 py-1.5 rounded-xl border border-amber-400/50 flex flex-wrap items-center gap-2 shadow-inner">
+          <span class="text-xs font-bold text-amber-300 flex items-center gap-1">
+            <i class="fa-solid fa-text-height"></i>
+            <span>字體大小：</span>
+          </span>
+          <button type="button" onclick="stepFontScale(-10)" class="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition" title="縮小文字">
+            A-
+          </button>
+          <div class="hidden sm:flex items-center gap-1">
+            <button type="button" onclick="setFontScale(100)" id="fontBtn_100" class="px-2 py-1 rounded text-xs font-bold transition">標準</button>
+            <button type="button" onclick="setFontScale(115)" id="fontBtn_115" class="px-2 py-1 rounded text-xs font-bold transition">舒適大字</button>
+            <button type="button" onclick="setFontScale(130)" id="fontBtn_130" class="px-2 py-1 rounded text-xs font-bold transition">超大護眼</button>
+            <button type="button" onclick="setFontScale(145)" id="fontBtn_145" class="px-2 py-1 rounded text-xs font-bold transition">特大</button>
+          </div>
+          <button type="button" onclick="stepFontScale(10)" class="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition" title="放大文字">
+            A+
+          </button>
+          <input type="range" id="fontScaleSlider" min="90" max="160" step="5" value="115" oninput="setFontScale(this.value)" class="w-20 accent-amber-400 cursor-pointer" title="拖曳調整文字大小">
+          <span id="fontScaleLabel" class="text-xs font-mono font-bold text-amber-300 w-11 text-right">115%</span>
+        </div>
+
+        <div class="bg-slate-800 px-3.5 py-1.5 rounded-lg border border-slate-700 flex items-center gap-3">
+          <div class="text-xs">
+            <span class="text-slate-300 block">本案業者應辦勾稽進度</span>
+            <span id="headerProgressText" class="font-bold text-emerald-400 text-sm">0 / 0 項 (0%)</span>
+          </div>
+          <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+            <div id="headerProgressBar" class="bg-emerald-400 h-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+        <button onclick="switchTab('print')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs sm:text-sm shadow transition flex items-center gap-1.5">
+          <i class="fa-solid fa-print"></i>
+          <span>預覽與列印勾稽表</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 主功能分頁切換列 -->
+    <div class="bg-slate-800/90 border-t border-slate-700/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex overflow-x-auto py-1.5 gap-2">
+        <button onclick="switchTab('overview')" id="tabBtn_overview" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+          <i class="fa-solid fa-sitemap"></i>
+          <span>1. 架構總覽與報竣工通則</span>
+        </button>
+        <button onclick="switchTab('guide')" id="tabBtn_guide" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>2. 分級應備文件與自主檢查（低壓 / 高壓 / 特高壓）</span>
+        </button>
+        <button onclick="switchTab('print')" id="tabBtn_print" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>3. 勾稽表設定與列印中心</span>
+        </button>
+        <button onclick="switchTab('tools')" id="tabBtn_tools" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+          <i class="fa-solid fa-calendar-day"></i>
+          <span>4. 特高壓時程倒推 & 現場不符自評工具</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 浮動通知容器 (不使用 alert) -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 no-print pointer-events-none"></div>
+
+  <!-- 網頁主內容區 (列印時隱藏) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 no-print">
+
+    <!-- =========================================================================
+         分頁 1：架構總覽與報竣工共通原則（通則）
+         設計理念：先看大架構圖（區分業者要做的事 vs 台電做的事），再看4張通則卡片，細節點開再看
+         ========================================================================= -->
+    <section id="tabContent_overview" class="space-y-8">
+
+      <!-- 頂部引導橫幅 -->
+      <div class="bg-gradient-to-r from-sky-900 via-sky-800 to-slate-900 rounded-2xl p-6 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs font-medium text-sky-200">
+            <i class="fa-solid fa-lightbulb text-amber-300"></i>
+            <span>為什麼這樣設計？先看全貌架構，需要時再點開看細項條文！</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold">業者辦理「新增設用戶用電設備」報竣工全貌指南</h2>
+          <p class="text-xs sm:text-sm text-sky-100/90 max-w-3xl leading-relaxed">
+            本指南專為<strong>電器承裝業</strong>與<strong>電機技師</strong>打造。我們將台電內部行政作業與業者的檢核表徹底分離：您只需要掌握「<strong>共通報竣工通則</strong>」與「<strong>各電壓等級應備文件及現場自檢</strong>」，即可快速完成送件準備並輸出自主勾稽表。
+          </p>
+        </div>
+        <button onclick="switchTab('guide')" class="shrink-0 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
+          <span>前往各類用戶應備清單</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- 第一部分：架構式全流程圖（清楚區分【業者必辦】與【台電端作業參考】） -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <i class="fa-solid fa-diagram-next text-sky-700"></i>
+              <span>一、從設計到送電：四大階段架構圖（點擊卡片可展開細節）</span>
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">蓝色卡片為<strong>【業者端應辦事項】</strong>；灰色卡片為<strong>【台電端作業流程（僅供參考，不列入業者勾稽表）】</strong></p>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="flex items-center gap-1.5 font-semibold text-sky-800"><span class="w-3 h-3 rounded-full bg-sky-600 inline-block"></span>業者核心職責</span>
+            <span class="flex items-center gap-1.5 font-semibold text-slate-500"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>台電端作業(僅供流程參考)</span>
+          </div>
+        </div>
+
+        <!-- 四大階段架構卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- 階段 1 (業者) -->
+          <div onclick="toggleFlowDetail('flow_1')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 1｜業者端</span>
+                <span class="text-xs text-sky-700 font-semibold"><i class="fa-solid fa-hand-pointer mr-1"></i>點看細節</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-1.5">設計資料送審</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                • <strong>特定7類案件</strong>（如≥100kW、6樓以上、配電場所、電動車充電樁等）須<strong>事先送審訖後興工</strong>。<br>
+                • <strong>一般低壓單獨設戶</strong>得免事先送審，配合報竣工時以「簡易圖面」一併辦理。
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-sky-200/70 text-[11px] font-semibold text-sky-800">
+              送審份數：一般1式3份 / 特高壓4份
+            </div>
+          </div>
+
+          <!-- 階段 2 (業者) -->
+          <div onclick="toggleFlowDetail('flow_2')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 2｜業者端核心</span>
+                <span class="text-xs text-sky-700 font-semibold"><i class="fa-solid fa-hand-pointer mr-1"></i>點看細節</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-1.5">完工自主檢查與測試</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                • 裝設完竣後，承裝業或監造技師先執行<strong>附件三「9大自行檢查項目」</strong>。<br>
+                • 將實測之<strong>全系統絕緣電阻</strong>與<strong>各接地點接地電阻</strong>填列於單線系統圖相關位置上。
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-sky-200/70 text-[11px] font-semibold text-sky-800">
+              並取得3大合格單位出具之竣工試驗報告
+            </div>
+          </div>
+
+          <!-- 階段 3 (業者) -->
+          <div onclick="toggleFlowDetail('flow_3')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 3｜業者端核心</span>
+                <span class="text-xs text-sky-700 font-semibold"><i class="fa-solid fa-hand-pointer mr-1"></i>點看細節</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-1.5">備齊文件提出報竣工</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                • 依低壓(表A)、高壓(表B)、特高壓(表B+表C+附件六)檢附竣工報告單、完整竣工圖、公會證明及VPC證書。<br>
+                • 現場與原設計不符處，逐項填於報告單內。
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-sky-200/70 text-[11px] font-semibold text-amber-800">
+              ⚠️ 特高壓變電所須於加入系統 20天前 完成
+            </div>
+          </div>
+
+          <!-- 階段 4 (台電端流程參考) -->
+          <div onclick="toggleFlowDetail('flow_4')" class="cursor-pointer rounded-xl border-2 border-slate-300 bg-slate-100/80 p-4 hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="bg-slate-600 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 4｜台電端作業流程</span>
+                <span class="text-xs text-slate-600 font-semibold"><i class="fa-solid fa-hand-pointer mr-1"></i>點看細節</span>
+              </div>
+              <h4 class="font-bold text-slate-800 text-base mb-1.5">台電檢討、現場核對與送電</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                • 台電區處檢討竣工報告（不影響安全之設計差異報主管核定）➔ 派員核對現場及用電用途。<br>
+                • 合格即予送電；不合規定則開立<strong>改修通知單(表A或表B)</strong>由業者改修複驗。
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-300 text-[11px] font-medium text-slate-500">
+              * 本階段屬台電權責，不列入業者勾稽表
+            </div>
+          </div>
+        </div>
+
+        <!-- 階段點擊展開之詳細說明抽屜 -->
+        <div id="flowDetailDrawer" class="mt-4 hidden rounded-xl bg-slate-50 border border-slate-200 p-5 text-xs sm:text-sm"></div>
+      </div>
+
+      <!-- 第二部分：所有用戶皆適用的「報竣工 4 大共通原則（通則）」架構卡片 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <div class="mb-5">
+          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-book-bookmark text-emerald-600"></i>
+            <span>二、業者報竣工「4 大共通原則（通則）」總整理</span>
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">無論辦理低壓、高壓或特高壓案件，以下 4 項通則皆為共通規定（點擊各卡片下方按鈕可展開完整條文細節）</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- 通則 1：單線系統圖簽章與標註 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 1｜圖面與印章規定</span>
+                <span class="text-xs text-slate-400">法源：附件二第9點、表A/B備註</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-2">單線系統圖「三方簽章一致性」與必註明事項</h4>
+              <ul class="space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                <li>• <strong>三方簽章必須一致</strong>：單線系統圖右下方須有「<strong>用戶、承裝業、監造者</strong>」簽章，且印章必須與竣工報告單上之簽章<strong>完全相同</strong>。</li>
+                <li>• <strong>自檢數據填列於圖面</strong>：須於單線圖詳註供電方式、配線/管路規格、保護開關、負載容量，以及實測之「<strong>全系統絕緣電阻</strong>」與「<strong>各接地點接地電阻</strong>」。</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <button onclick="toggleRuleAccordion('rule_1')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>點此展開：高低壓單線圖完整必註明清單與左下角預留空間規定</span>
+              </button>
+              <div id="rule_1" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                <p><strong>1. 低壓及一般回路必註明：</strong>供電方式、配線種類、線徑、管徑、管別、保護開關、負載容量、於接戶開關(總開關)測得之全系統絕緣電阻、各接地點之接地電阻。</p>
+                <p><strong>2. 高壓以上設備另須詳註：</strong>設備名稱、主要規格、接線方式、啟斷容量(IC)、絕緣耐壓、接地裝置及其接地電阻、計器/電驛特性規格及電子式(數位式)電驛之工作電源供應方式。</p>
+                <p><strong>3. 圖面左下角預留：</strong>單線系統圖左下角供台電區處加蓋「檢討者、檢驗者、審核者、核定者」簽章欄（附件五），製圖時請勿占用左下角空白處。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通則 2：竣工試驗報告出具單位資格 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 2｜試驗報告資格</span>
+                <span class="text-xs text-slate-400">法源：要點第5點(二)、檢驗辦法第15條</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-2">送電前用電設備「竣工試驗報告」法定出具單位（3擇1）</h4>
+              <p class="text-xs text-slate-600 mb-2">送電前用電設備之竣工試驗報告，必須由下列<strong>三類合格單位之一</strong>出具：</p>
+              <ol class="space-y-1 text-xs font-semibold text-slate-800 list-decimal list-inside bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-100">
+                <li>中央主管機關或其認可之檢驗機構</li>
+                <li>登記合格之「用電設備檢驗維護業」</li>
+                <li>監造「電機技師」之執業機構或所屬機關</li>
+              </ol>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <button onclick="toggleRuleAccordion('rule_2')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>點此展開：高壓用電設備出廠與現場試驗報告查對要點</span>
+              </button>
+              <div id="rule_2" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                <p>• 除上述竣工試驗報告外，高壓以上設備另須查對是否符合「<strong>經濟部認可檢驗機構與原製造廠家及高壓用電設備施行試驗作業要點</strong>」規定之出廠/型式試驗報告（附件三第3點）。</p>
+                <p>• 高壓以上以斷路器保護者，應測試各保護電驛之<strong>特性試驗、跳脫試驗及接線試驗</strong>，並將試驗報告併於竣工報告單提送（附件三第9點）。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通則 3：現場與已審妥設計資料不符之處理 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 3｜現場與設計差異處理</span>
+                <span class="text-xs text-slate-400">法源：要點第5點(一)(三)、附件二第8點</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-2">現場裝置與「已審妥設計資料」不符時之申報原則</h4>
+              <ul class="space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                <li>• <strong>原則不得任意改變</strong>：設計資料經台電審定後原則上不得改變；如有重大變更設計必要時，應由原設計者將變更設計送審同意後再施工。</li>
+                <li>• <strong>不影響安全之局部差異可於竣工單填報</strong>：若現場裝置與審妥設計不符，但<strong>符合法規規定且不影響供電安全者</strong>，業者應<strong>逐項填列於竣工報告單內</strong>，由區處檢討報主管核定後即可檢驗送電。</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <button onclick="toggleRuleAccordion('rule_3')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>點此展開：如何填寫不符說明欄 & 設計資料更正要點(附件二之二)核對</span>
+              </button>
+              <div id="rule_3" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                <p><strong>1. 圖審「更正要點」核對：</strong>若審圖時台電附有「設計資料更正要點（附件二之二）」，業者於報竣工時應確認已依更正要點自行檢討修正完妥，檢驗送電時台電人員將逐項查對。</p>
+                <p><strong>2. 竣工單不符欄填寫位置：</strong>高壓用戶請填於「附件四表B」正面下方之「現場裝置與設計資料不符說明（1~4點：設計資料 vs 現場裝置）」；自備變電所另填於「附件四表C」第十五項。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通則 4：特殊條件加附文件（充電樁VPC、電機技師、裝置契約） -->
+          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 4｜特殊工程加附文件</span>
+                <span class="text-xs text-slate-400">法源：要點第5點(一)、附件四第4~6點</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-base mb-2">電動車充電樁、電機技師監造、裝置契約之必附文件</h4>
+              <ul class="space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                <li>• <strong>電動車輛充電設備</strong>：無論高低壓，新(增)設充電設備皆須<strong>事先送審設計資料</strong>，且報竣工時須另檢附經濟部標檢局「<strong>自願性產品驗證 (VPC) 證書</strong>」。</li>
+                <li>• <strong>電機技師辦理之工程</strong>：須附技師公會竣工審驗紀錄單、會員證明(竣工用)及有效執照影本（更換技師須附拋棄聲明書）。</li>
+                <li>• <strong>裝置契約用戶</strong>：須填報「<strong>用電設備入力容量紀錄卡（附件四表D）</strong>」。</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <button onclick="toggleRuleAccordion('rule_4')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>點此展開：更換電機技師「拋棄聲明書」用印規定 & 影本簽章規定</span>
+              </button>
+              <div id="rule_4" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                <p><strong>1. 更換電機技師拋棄聲明書（附件四第5點(三)）：</strong>中途更換電機技師時應檢附拋棄聲明書，聲明書上除「<strong>業主、拋棄業務之技師及承接業務之技師</strong>」三方用印外，亦<strong>需經中華民國電機技師公會核章</strong>。</p>
+                <p><strong>2. 證件影本簽章規定：</strong>檢附之電機技師執業執照影本或承裝業公會印鑑卡影本，均須加蓋「<strong>與正本相符</strong>」章並簽名蓋章。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         分頁 2：分級應備文件與自主檢查（低壓 / 高壓 / 特高壓）
+         設計理念：頂部選擇電壓等級與附加條件，下方以「清爽架構卡片」呈現，點開才看細項，並可直接打勾連動列印！
+         ========================================================================= -->
+    <section id="tabContent_guide" class="space-y-6 hidden">
+
+      <!-- 步驟 1：選擇用戶類型與工程附加條件 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h2 class="font-bold text-slate-800 text-base sm:text-lg flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-sky-700 text-white text-xs flex items-center justify-center font-bold">1</span>
+              <span>選擇本案「用戶電壓等級」與「特殊附加條件」</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">切換後，下方將只顯示該等級業者必須準備的「應檢附文件」與「自主檢查架構卡片」</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="expandAllCards(true)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-medium transition">
+              <i class="fa-solid fa-angles-down mr-1"></i>展開全部細項
+            </button>
+            <button onclick="expandAllCards(false)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-medium transition">
+              <i class="fa-solid fa-angles-up mr-1"></i>收合全部細項
+            </button>
+          </div>
+        </div>
+
+        <!-- 三大用戶類型大型切換器 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <!-- 低壓用戶 -->
+          <button type="button" onclick="selectVoltageLevel('lv')" id="vCard_lv" class="text-left p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-base text-slate-900">A. 低壓供電用戶</span>
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">適用附件四表A</span>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              含一般低壓單獨設戶（可簡易圖面報竣工）、同格局多戶（加附續頁騎縫章）及契約≥100kW/6樓以上等需先審圖之低壓用戶。
+            </p>
+          </button>
+
+          <!-- 高壓用戶 -->
+          <button type="button" onclick="selectVoltageLevel('hv')" id="vCard_hv" class="text-left p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-base text-slate-900">B. 高壓供電用戶</span>
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">適用附件四表B</span>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              須事先送審設計(1式3份)。報竣工檢附表B、高壓設備出廠與竣工試驗報告(1~9項張數清點)及斷路器保護電驛三項試驗報告。
+            </p>
+          </button>
+
+          <!-- 特高壓用戶 -->
+          <button type="button" onclick="selectVoltageLevel('ehv')" id="vCard_ehv" class="text-left p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-base text-slate-900">C. 特高壓用戶 (自備變電所/汽電共生)</span>
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">表B + 表C + 附件六</span>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              預定加入系統 <strong>20天前</strong> 完成報竣工。除表B外，必附「自備變電所檢查表C(15大項)」及「附件六加入系統調度操作準則」各項文件。
+            </p>
+          </button>
+        </div>
+
+        <!-- 特殊工程附加條件勾選列 -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center gap-4 text-xs">
+          <span class="font-bold text-slate-700"><i class="fa-solid fa-plus-circle text-sky-700 mr-1"></i>本案特殊條件（勾選後自動加入必備清單）：</span>
+          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
+            <input type="checkbox" id="opt_ev" onchange="updateOptions()" class="rounded text-sky-700">
+            <span>含電動車充電設備 (需附標檢局 VPC 證書)</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
+            <input type="checkbox" id="opt_pe" onchange="updateOptions()" class="rounded text-sky-700">
+            <span>屬電機技師設計監造範圍 (附技師公會竣工證明/執照)</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
+            <input type="checkbox" id="opt_deviceContract" onchange="updateOptions()" class="rounded text-sky-700">
+            <span>屬裝置契約用戶 (需附附件四表D 入力容量紀錄卡)</span>
+          </label>
+          <label id="opt_multiHouse_wrap" class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
+            <input type="checkbox" id="opt_multiHouse" onchange="updateOptions()" class="rounded text-sky-700">
+            <span>低壓同格局多戶集合住宅 (加附表A續頁並蓋騎縫章)</span>
+          </label>
+          <label id="opt_cogen_wrap" class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
+            <input type="checkbox" id="opt_cogen" onchange="updateOptions()" class="rounded text-sky-700">
+            <span>含汽電共生發電機組 (需附附表四~十二模型及RTU測試)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 步驟 2：動態渲染之「業者應備文件與自主檢查」架構式卡片清單 -->
+      <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+        <div class="text-xs text-slate-600">
+          <i class="fa-solid fa-circle-info text-sky-600 mr-1"></i>
+          提示：每張卡片預設僅顯示<strong>架構重點</strong>，點擊卡片下方「<strong>展開查看細項與檢查表</strong>」即可檢視完整法規條文；右側可直接打勾或填入實測備註，將自動同步至列印勾稽表！
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="batchMarkStatus('ok')" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-semibold px-3 py-1.5 rounded-lg transition">
+            <i class="fa-solid fa-check-double mr-1"></i>本頁全部標為已備齊/合格
+          </button>
+          <button onclick="batchMarkStatus('pending')" class="text-xs bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 font-medium px-3 py-1.5 rounded-lg transition">
+            重置狀態
+          </button>
+        </div>
+      </div>
+
+      <!-- 架構卡片容器 -->
+      <div id="contractorCardsContainer" class="space-y-6"></div>
+
+    </section>
+
+    <!-- =========================================================================
+         分頁 3：勾稽表設定與列印中心（業者專用版）
+         設計理念：可先設定案件表頭、勾選要列印哪些章節、選擇是否展開細項子表、選擇空白或已檢核模式
+         ========================================================================= -->
+    <section id="tabContent_print" class="space-y-6 hidden">
+
+      <!-- 列印設定控制面板 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+          <div>
+            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <i class="fa-solid fa-print text-sky-700"></i>
+              <span>業者專用「報竣工自主勾稽表」列印設定中心</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">您可以先設定案件基本資料、勾選要納入列印的內容模組與細項程度，再預覽並印出 A4 紙本或另存 PDF</p>
+          </div>
+          <button onclick="window.print()" class="bg-sky-700 hover:bg-sky-800 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 text-sm">
+            <i class="fa-solid fa-print"></i>
+            <span>立即列印 / 匯出 A4 PDF</span>
+          </button>
+        </div>
+
+        <!-- 1. 案件表頭基本資料設定 (可選填，印在勾稽表最上方) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-2">1. 設定勾稽表表頭工程資訊（選填，將顯示於列印表單頂部）</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <div>
+              <span class="text-slate-500 block mb-1">用戶名稱 / 工程名稱</span>
+              <input type="text" id="pMeta_user" oninput="saveMetaAndRefreshPrint()" placeholder="例：台灣精密科技廠房新建工程" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+            </div>
+            <div>
+              <span class="text-slate-500 block mb-1">受理號碼 / 電號 / 區營業處</span>
+              <input type="text" id="pMeta_no" oninput="saveMetaAndRefreshPrint()" placeholder="例：台北北區處 / 115-08912" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+            </div>
+            <div>
+              <span class="text-slate-500 block mb-1">負責施工電器承裝業</span>
+              <input type="text" id="pMeta_contractor" oninput="saveMetaAndRefreshPrint()" placeholder="例：永安機電工程有限公司" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+            </div>
+            <div>
+              <span class="text-slate-500 block mb-1">設計/監造電機技師 & 預定送電日</span>
+              <input type="text" id="pMeta_engineer" oninput="saveMetaAndRefreshPrint()" placeholder="例：林大華 技師 / 115-12-01" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 列印模式與細項展開設定 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-3 border-t border-slate-100">
+          <!-- 左：列印篩選與展開程度 -->
+          <div class="space-y-3">
+            <label class="block text-xs font-bold text-slate-700 uppercase">2. 選擇列印格式、細項程度與「列印字體大小」</label>
+            <!-- 新增：A4 列印專用字體大小選擇器 -->
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="font-bold text-amber-950 flex items-center gap-1.5">
+                <i class="fa-solid fa-magnifying-glass-plus text-amber-700"></i>
+                <span>A4 紙本／PDF 列印字體大小：</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+                  <input type="radio" name="printFontSize" value="11pt" onchange="updatePrintFontSize(this.value)" class="text-sky-700">
+                  <span>標準 (11pt)</span>
+                </label>
+                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+                  <input type="radio" name="printFontSize" value="12.5pt" checked onchange="updatePrintFontSize(this.value)" class="text-sky-700">
+                  <span>舒適大字 (12.5pt)</span>
+                </label>
+                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+                  <input type="radio" name="printFontSize" value="14pt" onchange="updatePrintFontSize(this.value)" class="text-sky-700">
+                  <span>特大清晰 (14pt)</span>
+                </label>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                <input type="radio" name="printMode" value="all" checked onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
+                <div>
+                  <span class="font-bold text-slate-800 block">列印全部勾選項目（含目前狀態）</span>
+                  <span class="text-slate-500">完整呈現已打勾(✓)、待辦與填寫之備註</span>
+                </div>
+              </label>
+              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                <input type="radio" name="printMode" value="blank" onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
+                <div>
+                  <span class="font-bold text-slate-800 block">空白現場查核表（供工地手寫打勾）</span>
+                  <span class="text-slate-500">狀態欄全部印為 `☐ 已備齊/合格`，方便手寫</span>
+                </div>
+              </label>
+              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                <input type="radio" name="printMode" value="incomplete" onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
+                <div>
+                  <span class="font-bold text-rose-700 block">僅列印「尚未完成 / 待補件」項目</span>
+                  <span class="text-slate-500">作為送件前最後缺件催辦清單</span>
+                </div>
+              </label>
+              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-sky-200 bg-sky-50/60 cursor-pointer">
+                <input type="checkbox" id="printIncludeSubItems" checked onchange="renderPrintDocument()" class="mt-0.5 rounded text-sky-700">
+                <div>
+                  <span class="font-bold text-sky-900 block">同時印出「展開之檢查細項清單」</span>
+                  <span class="text-slate-600">如暗管10項、一般10項、表C變電所15大項細目</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 右：要納入列印的內容區塊勾選 -->
+          <div class="space-y-3">
+            <label class="block text-xs font-bold text-slate-700 uppercase">3. 先設定哪些內容章節要列印（可自由勾選組合）</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_header" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">工程基本資料表頭</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_common" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">【通則】單線圖三方簽章與必註事項檢核</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_docs" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">【書面】報竣工應檢附書面與證明文件</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_self" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">【自檢】現場自主檢查與測試項目</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_dispatch" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">【特高壓】加入系統調度操作準則文件(附件六)</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_sign" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+                <span class="font-medium text-slate-800">業者自主檢核三方簽章欄 (用戶/承裝業/技師)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A4 即時預覽區 -->
+      <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+        <span><i class="fa-solid fa-file-lines mr-1"></i>下方為 A4 勾稽表即時預覽（單一項目若不想列印，可在分頁 2 取消該卡片的「🖨️ 納入列印」勾選）</span>
+        <span>目前設定適用等級：<strong id="printLevelLabel" class="text-slate-800">高壓供電用戶</strong></span>
+      </div>
+
+      <div id="printPreviewBox" class="bg-white rounded-xl shadow-lg border border-slate-300 p-6 sm:p-10 max-w-4xl mx-auto"></div>
+
+    </section>
+
+    <!-- =========================================================================
+         分頁 4：業者實用工具箱（特高壓送件時程倒推計算機 & 現場與設計不符自評工具）
+         ========================================================================= -->
+    <section id="tabContent_tools" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- 工具 1：特高壓自備變電所/汽電共生「業者送件時程倒推計算機」 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-stopwatch"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">工具 1：特高壓用戶「業者報竣工與調度送件」時程倒推計算機</h3>
+                <p class="text-xs text-slate-500">依據要點第5點(四)及附件六「自備變電所調度操作準則」推算業者最遲送件日</p>
+              </div>
+            </div>
+
+            <div class="bg-purple-50/70 p-3.5 rounded-xl border border-purple-200 mb-4 flex flex-wrap items-center justify-between gap-2">
+              <label class="text-xs font-bold text-purple-950">請輸入業主「預定加入台電系統送電日」：</label>
+              <input type="date" id="toolTargetDate" onchange="calculateContractorTimeline()" class="px-3 py-1.5 text-sm font-bold text-purple-900 bg-white border border-purple-300 rounded-lg outline-none">
+            </div>
+
+            <div id="contractorTimelineOutput" class="space-y-2.5 text-xs"></div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 leading-relaxed">
+            💡 <strong>業者重要提醒（附件六 7-2、7-3）：</strong>已核准之送電要求書因故無法如期施行時，應將原因及延期日期通知台電審核單位；若因設備異常修復再次加入時期間<strong>超過 30 天(含)以上</strong>，原要求書作廢，業者須重新提送要求書。
+          </div>
+        </div>
+
+        <!-- 工具 2：現場裝置與已審妥設計不符「業者處理方式自評工具」 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-code-branch"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">工具 2：現場施工與原審訖設計不符「業者應對自評器」</h3>
+                <p class="text-xs text-slate-500">幫助承裝業與監造技師快速判斷：該直接報竣工填說明欄，還是先辦變更設計？</p>
+              </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                <p class="font-bold text-slate-800 mb-2">請選擇目前現場與原審定設計圖差異之情形：</p>
+                <div class="space-y-2">
+                  <label class="flex items-start gap-2 cursor-pointer">
+                    <input type="radio" name="diffCase" value="case1" checked onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                    <span><strong>情形 A：</strong>現場局部裝置調整與已審妥設計不符，但<strong>符合「用戶用電設備裝置規則」規定，且不影響供電安全</strong>（例如分路配置微調、同等級器材替換等）。</span>
+                  </label>
+                  <label class="flex items-start gap-2 cursor-pointer">
+                    <input type="radio" name="diffCase" value="case2" onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                    <span><strong>情形 B：</strong>涉及重大設計變更（如變更受電電壓、主變壓器容量、責任分界點、主保護電驛協調架構或增設諧波/閃爍源）。</span>
+                  </label>
+                  <label class="flex items-start gap-2 cursor-pointer">
+                    <input type="radio" name="diffCase" value="case3" onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                    <span><strong>情形 C：</strong>現場實際裝設之用電設備，與當初向台電申請用電登記單所列之<strong>「用電用途別」不符</strong>。</span>
+                  </label>
+                </div>
+              </div>
+
+              <div id="diffCaseResult" class="p-4 rounded-xl border-2"></div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500">需要保存本案勾稽進度以便下次繼續編輯嗎？</span>
+            <div class="flex gap-2">
+              <button onclick="exportContractorJSON()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-lg font-medium">匯出備份 (.json)</button>
+              <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg font-medium cursor-pointer">
+                匯入備份
+                <input type="file" accept=".json" onchange="importContractorJSON(event)" class="hidden">
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 實際列印專用容器 (平時隱藏，列印時滿版顯示) -->
+  <div id="actualPrintContainer" class="hidden print-only-container"></div>
+
+  <!-- 頁尾 (列印時隱藏) -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between text-xs text-slate-500 gap-2">
+      <div>法規依據：台灣電力股份有限公司新增設用戶用電設備檢驗要點（115年10月1日修正版）</div>
+      <div>系統視角：專供電器承裝業、電機技師及自備變電所工程團隊進行報竣工文件準備與自主檢查勾稽使用</div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       JavaScript 核心資料庫與互動邏輯
+       ========================================================================= -->
+  <script>
+    // 1. 四大階段流程展開細節資料 (區分業者端 vs 台電端參考)
+    const FLOW_STAGE_DATA = {
+      flow_1: {
+        badge: '階段 1｜業者端應辦事項（附件二）',
+        title: '用電設備設計資料送審：哪些案件要事先送審？要準備什麼？',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200">
+              <h5 class="font-bold text-sky-800 mb-1.5">📌 必須「事先將設計資料送台電審查訖後興工」之 7 種情形：</h5>
+              <ol class="list-decimal list-inside space-y-1 text-slate-700 text-xs">
+                <li><strong>契約容量 100 瓩(kW) 以上</strong>之電力用電。</li>
+                <li><strong>6 層以上新建築物</strong>之新設用電。</li>
+                <li>公寓、商場、大樓等新設用電其<strong>設備容量合計在 100 瓩以上</strong>，應以高壓供電，而經用戶要求改以低壓供電或分別設戶裝表者。</li>
+                <li><strong>設置配電場所</strong>者。</li>
+                <li>用戶要求審查設計資料者。</li>
+                <li><strong>電動汽車充電設備</strong>。</li>
+                <li>其他法令另定有用戶用電設備工程之電機技師或相關專業技師設計監造之範圍者。</li>
+              </ol>
+              <p class="mt-2 text-xs text-emerald-700 font-semibold">👉 其餘一般低壓單獨設戶者：可配合報竣工時以「簡易圖面（位置圖、單線圖、配置圖）」一併辦理圖審，免設計計算資料！</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-2 text-xs">
+              <h5 class="font-bold text-sky-800">📂 事先送審應備齊資料（1式3份，特高壓以上用戶 4份）：</h5>
+              <p><strong>(一) 設計圖(7項)：</strong>1.圖號目錄清單、2.用電場所位置圖(含責任分界點確實位置)及圖例、3.單線系統圖、4.接地系統圖、5.變配電設備(MOF/CB/TR/LA/電纜/匯流排/線槽等)施工說明及配置圖、6.高樓幹線昇位圖(5樓以下免附)、7.配電場所施工圖(無者免附)。</p>
+              <p><strong>(二) 設計計算資料(9項)：</strong>1.目錄清單、2.工程概要(含預定10年後負荷)、3.施工概要說明(特殊場所分類及防塵/防爆型式)、4.故障電流計算及啟斷容量檢討、5.電壓降計算(僅須檢討至各樓層總開關箱處)、6.接地電阻計算(特高壓含步級及接觸電壓計算)、7.保護電驛設定計算/協調曲線圖/設定一覽表/說明書、8.遽變負荷(電弧爐/電焊機等)電壓閃爍計算及改善、9.諧波源達300kVA以上之諧波計算及改善。</p>
+              <p><strong>(三) 其他資料：</strong>設計監造委託書(含複委託契約)、電機技師執照影本+技師公會會員證明(圖審用)+電力工程設計審驗紀錄單（或承裝業公會會員證明單印鑑卡影本，須蓋「與正本相符」並簽章）、新增設用電計畫書核准函影本。</p>
+              <p class="text-slate-500 pt-1 border-t border-slate-100">⏱️ <strong>台電審查期限參考（不含補件日數）：</strong>低壓 3個工作天內 ｜ 高壓及設配電場所低壓 10個工作天內 ｜ 特高壓 20個工作天內（會審台北7天/外縣市10天）。</p>
+            </div>
+          </div>
+        `
+      },
+      flow_2: {
+        badge: '階段 2｜業者端核心職責（要點五(一)(二)、附件三）',
+        title: '完工後承裝業／監造者自主檢查與圖面數據填列',
+        content: `
+          <div class="space-y-2 text-xs text-slate-700">
+            <p>1. <strong>先自檢再報竣工：</strong>用戶用電設備裝設完竣後，負責施工之承裝業或監造者應先依【附件三】執行 9 大項自行檢查（絕緣測試、接地測試、試驗報告查對、開關及標識查對、管線查對、用途查對、安全距離、裝置契約入力容量測試、高壓斷路器保護電驛特性/跳脫/接線試驗）。</p>
+            <p>2. <strong>測試結果填於單線系統圖：</strong>將自檢測試結果（包含於總開關測得之全系統絕緣電阻、各接地點之接地電阻值等）填列於單線系統圖之相關位置上，並於單線圖右下角加蓋「用戶、承裝業、監造者」三方簽章。</p>
+            <p>3. <strong>備妥竣工試驗報告：</strong>送電前用電設備之竣工試驗報告，應由「中央主管機關或其認可之檢驗機構」、「登記合格之用電設備檢驗維護業」或「監造電機技師之執業機構或所屬機關」三者之一出具。</p>
+          </div>
+        `
+      },
+      flow_3: {
+        badge: '階段 3｜業者端核心職責（要點五、附件四、附件六）',
+        title: '向台電區營業處提出竣工報告（各等級應附文件總整）',
+        content: `
+          <div class="space-y-2 text-xs text-slate-700">
+            <p>• <strong>低壓用戶：</strong>提送「竣工報告單（附件四表A）」＋「完整竣工圖面」（同格局多戶可加附續頁黏貼並蓋騎縫章）。</p>
+            <p>• <strong>高壓用戶：</strong>提送「竣工報告單（附件四表B）」＋「完整竣工圖面」＋「高壓設備出廠與竣工試驗報告（清點1~9項張數）」＋「保護電驛三項試驗報告」。</p>
+            <p>• <strong>特高壓用戶（自備變電所/汽電共生）：</strong>須於<strong>預定加入系統前 20 天</strong>完成報竣工！除表B與竣工圖外，須另檢附「自備變電所竣工檢查表（附件四表C）」及「附件六調度操作準則」之聲明書、各項試驗合格表、會驗申請書及送電要求書技術資料。</p>
+            <p>• <strong>特殊必附：</strong>新(增)設電動車充電設備必附「經濟部標檢局自願性產品驗證(VPC)證書」；電機技師工程必附公會竣工審驗紀錄單、會員證明(竣工用)及執照影本；裝置契約必附「附件四表D」。</p>
+          </div>
+        `
+      },
+      flow_4: {
+        badge: '階段 4｜台電端作業流程說明（要點五(三)、六、附件七 — 僅供業者了解流程，不列入業者檢核表）',
+        title: '台電收到竣工報告後的檢討、現場核對與送電／改修原則',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5">
+              <h5 class="font-bold text-slate-800">🏢 1. 台電區處內部檢討與現場核對：</h5>
+              <p>• 區營業處收到竣工報告後指派人員檢討。如符合規定，台電於單線圖左下角加蓋內部簽章欄（附件五）並派員現場檢驗。</p>
+              <p>• 若竣工報告與已審妥設計不符但符合法規且不影響供電安全，由台電內部逐項報主管核定後檢驗送電。</p>
+              <p>• 現場檢驗時，台電人員會核對「用電裝置規則」、竣工報告內容、電表CT/PT倍數與端子螺絲，以及<strong>現場用電用途是否與申請登記單相符（用途不符者不得送電）</strong>。</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5">
+              <h5 class="font-bold text-rose-800">🛠️ 2. 若現場檢驗有缺失時之處理（附件七）：</h5>
+              <p>• <strong>不影響用電安全（開立附件七表A）：</strong>除不合標準部分應隔離並通知限期改修外，其餘部分得<strong>先行送電</strong>。</p>
+              <p>• <strong>影響用電安全（開立附件七表B）：</strong><strong>未便接電（不予送電）</strong>，書面通知承裝業限期改修（第4聯副知用戶）。</p>
+              <p>• <strong>業者申請複驗方式：</strong>業者將應改修事項改修完妥後，於改修通知單下端蓋妥「承裝業蓋章」及「電機技師蓋章」，送還區營業處並<strong>照章繳付複驗費</strong>，申請派員複驗。</p>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    // 2. 業者專用「分級應備文件與自主檢查」架構式卡片資料庫
+    // 純粹包含「業者（承裝業/電機技師）」要準備或自檢的事項，不包含台電內部作業
+    // levels: ['lv', 'hv', 'ehv']
+    // opt: null | 'ev' | 'pe' | 'deviceContract' | 'multiHouse' | 'cogen'
+    const CONTRACTOR_CARDS_DB = [
+      // ==================== 第一類：共通圖面簽章與特殊條件必備文件 ====================
+      {
+        id: 'c_common_drawing',
+        group: 'common',
+        groupTitle: '壹、共通核心圖面與簽章檢核（所有案件必備）',
+        badge: '通則必備｜圖面與簽章',
+        title: '完整竣工圖面（單線系統圖「三方簽章一致性」與實測電阻值標註）',
+        summary: '確認單線系統圖右下角已蓋妥「用戶、承裝業、監造者」簽章（與竣工報告單印章完全相同），且已將實測絕緣電阻與接地電阻填於圖面。',
+        basis: '要點五(一)、附件二第9點、附件四表A/B備註',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: null,
+        subItems: [
+          '1. 單線系統圖右下方「用電裝置竣工圖簽章處」已蓋妥：用戶簽章、承裝業簽章、監造者簽章。',
+          '2. 單線系統圖上之三方印章，經核對與「竣工報告單」上所蓋印章完全相同。',
+          '3. 單線系統圖左下角已預留空白，供台電區營業處加蓋檢討/檢驗/審核/核定簽章欄（附件五）。',
+          '4. 單線系統圖已詳註：供電方式、配線種類、線徑、管徑、管別、保護開關、負載容量。',
+          '5. 已於單線系統圖相關位置填列：於接戶開關(低壓總開關)測得之「全系統絕緣電阻值」及「各接地點之接地電阻值」。',
+          '6. 【高壓以上增列】單線圖已另詳註高壓設備名稱、規格、接線方式、啟斷容量(IC)、絕緣耐壓、接地裝置及其電阻、電子式/數位式電驛工作電源供應方式。'
+        ]
+      },
+      {
+        id: 'c_opt_ev',
+        group: 'common',
+        groupTitle: '壹、共通核心圖面與簽章檢核（所有案件必備）',
+        badge: '充電設備必附｜要點五(一)',
+        title: '【電動車充電樁】經濟部標準檢驗局「自願性產品驗證 (VPC) 證書」',
+        summary: '新(增)設電動車輛充電設備者，須完成事先設計送審，並於報竣工時檢附標檢局 VPC 證書影本及確認內線器材 VPC 標識。',
+        basis: '要點五(一)、附件二第1點(六)、附件四第6點',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: 'ev',
+        subItems: [
+          '1. 設計資料已於施工前事先送經台電審查訖（附件二第1點(六)規定充電設備不得後補審圖）。',
+          '2. 報竣工時已檢附經濟部標準檢驗局核發之「自願性產品驗證（VPC）證書」。',
+          '3. 現場充電設備與內線器材已確認貼有檢驗合格標識或自願性產品驗證（VPC）標識（表A/B一般檢查第8項）。'
+        ]
+      },
+      {
+        id: 'c_opt_pe',
+        group: 'common',
+        groupTitle: '壹、共通核心圖面與簽章檢核（所有案件必備）',
+        badge: '電機技師工程必附｜附件四第5點',
+        title: '【電機技師監造】技師公會竣工審驗紀錄單、會員證明(竣工用)、有效執照影本（及更換技師拋棄聲明書）',
+        summary: '依法由電機技師設計監造之工程，報竣工時須檢附技師公會核發之竣工文件與有效執業執照影本。',
+        basis: '附件四第5點(一)~(三)',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: 'pe',
+        subItems: [
+          '1. 中華民國電機技師公會核發之「電力工程竣工審驗紀錄單」。',
+          '2. 中華民國電機技師公會核發之「電機技師會員證明（竣工用）」（黏貼於竣工報告單背面黏貼處）。',
+          '3. 有效期限內之「監造電機技師執業執照影本」（影本須加蓋「與正本相符」並簽名蓋章）。',
+          '4. 【如有中途更換電機技師時必附】檢附「拋棄聲明書」，聲明書上須有「業主、拋棄業務技師、承接業務技師」用印，且需經「中華民國電機技師公會核章」。'
+        ]
+      },
+      {
+        id: 'c_opt_device_d',
+        group: 'common',
+        groupTitle: '壹、共通核心圖面與簽章檢核（所有案件必備）',
+        badge: '裝置契約必附｜附件四表D',
+        title: '【裝置契約用戶】用電設備入力容量紀錄卡（附件四表D）及入力容量測試',
+        summary: '裝置契約用戶應由承裝業/監造者先測試入力容量（區處已測定給紀錄者免再測），並填妥表D設備規範與製造廠資料。',
+        basis: '附件三第8點、附件四第4點(表D)',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: 'deviceContract',
+        subItems: [
+          '1. 填妥附件四表D「規範」欄：設備名稱、相數、極數、額定電壓、額定電流、容量。',
+          '2. 填妥附件四表D「製造廠」欄：製造廠名稱、型式、號碼、用途。',
+          '3. 蓋妥下方「用戶認章」及「承裝業認章」（註：「測定記錄」之啟動電流、無載/全載電壓電流欄由台電檢驗人員填寫，若區處已測定並發給試驗紀錄者免再測試）。'
+        ]
+      },
+
+      // ==================== 第二類：報竣工應檢附書面報告與證明文件（依低/高/特高壓分級） ====================
+      {
+        id: 'c_lv_formA',
+        group: 'docs',
+        groupTitle: '貳、各等級報竣工「應檢附書面報告與證明文件」',
+        badge: '低壓必備｜附件四表A',
+        title: '低壓用戶「用電設備竣工報告單（附件四表A）」及承裝業公會申報竣工會員證明',
+        summary: '填妥表A正面用電地址、容量、用途及暗管/一般檢查紀錄，蓋妥用戶/監造者/承裝業印章，背面黏貼電氣工程工業同業公會會員證明。',
+        basis: '要點五(一)、附件四表A',
+        levels: ['lv'],
+        opt: null,
+        subItems: [
+          '1. 表A正面頂部：填寫完工日期、預定派員檢查送電日期、所屬區營業處。',
+          '2. 表A簽章欄：蓋妥「用戶簽章」、「監造者簽章」，並填寫承裝業名稱、地址、統一編號及加蓋「承裝業簽章」。',
+          '3. 表A電號與用電資料欄：填寫營業區、電號、用電別(燈/力/綜合/新設/增設等)、設備容量、契約容量、用電用途及完整地址。',
+          '4. 表A背面右下角黏貼處：實貼「台灣區電氣工程工業同業公會申報竣工會員證明」（或電機技師公會竣工用會員證明）。',
+          '5. 【免事先送審之低壓單獨設戶】得以簡易圖面（含用電場所位置圖、單線系統圖、用電設備配置圖，註明用戶名稱及用電地址，免設計計算資料）蓋妥用戶及承裝業簽章，配合報竣工一併辦理圖審。'
+        ]
+      },
+      {
+        id: 'c_lv_multi_cont',
+        group: 'docs',
+        groupTitle: '貳、各等級報竣工「應檢附書面報告與證明文件」',
+        badge: '低壓多戶必備｜表A續頁',
+        title: '【低壓同格局多戶】竣工報告單（續頁）－配線裝置竣工檢查紀錄表（黏貼於單線圖並蓋騎縫章）',
+        summary: '房屋格局、單線系統圖及用電別均相同之低壓多戶報竣工時，除附1份單線圖外，應逐戶測試絕緣與接地電阻填於續頁，黏貼於單線圖並加蓋騎縫章。',
+        basis: '附件四表A(續頁)備註1~3',
+        levels: ['lv'],
+        opt: 'multiHouse',
+        subItems: [
+          '1. 確認各戶之房屋格局、單線系統圖及用電別均相同，檢附 1 份共同單線系統圖。',
+          '2. 於「竣工報告單(續頁)－配線裝置竣工檢查紀錄表」按順序逐戶填列：單線圖代號、電號、用電地址、用途、實測「絕緣電阻」、實測「接地電阻」及「用戶簽章」。',
+          '3. 續頁上方蓋妥「承裝業簽章」及「監造者簽章」。',
+          '4. 將續頁妥善黏貼於單線系統圖適當位置，並於黏貼處加蓋「騎縫章」。'
+        ]
+      },
+      {
+        id: 'c_hv_formB',
+        group: 'docs',
+        groupTitle: '貳、各等級報竣工「應檢附書面報告與證明文件」',
+        badge: '高壓/特高壓必備｜附件四表B',
+        title: '高壓以上用戶「用電設備竣工報告單（附件四表B）」及公會竣工會員證明',
+        summary: '填妥表B正面檢查表、現場與設計資料不符說明、高壓設備試驗報告張數(1~9項)，背面黏貼承裝業/技師/檢驗維護業公會會員證明(竣工用)。',
+        basis: '要點五(一)、附件四表B',
+        levels: ['hv', 'ehv'],
+        opt: null,
+        subItems: [
+          '1. 表B正面簽章與基本資料：蓋妥用戶簽章、監造者簽章、承裝業名稱/地址/統編/簽章，填寫電號、設備容量、契約容量及用途。',
+          '2. 表B正面「現場裝置與設計資料不符說明」欄：若現場與已審妥設計有不影響安全之差異，逐項對照填寫（1~4點：設計資料 vs 現場裝置）。',
+          '3. 表B正面「試驗報告」欄：清點並填寫檢附之高壓設備報告張數：(1)變壓器、(2)比壓器PT、(3)比流器CT、(4)斷路器CB、(5)避雷器LA、(6)熔絲、(7)氣體絕緣開關GIS、(8)高壓配電盤、(9)其他，並勾選「2.已附高壓以上設備竣工試驗報告」。',
+          '4. 表B背面右下角黏貼處：黏貼「電氣工程工業同業公會申報竣工會員證明」、「電機技師公會會員證明(竣工用)」或「用電設備檢驗維護工程工業同業公會會員證明(竣工用)」。'
+        ]
+      },
+      {
+        id: 'c_hv_test_reports',
+        group: 'docs',
+        groupTitle: '貳、各等級報竣工「應檢附書面報告與證明文件」',
+        badge: '高壓/特高壓必備｜要點五(二) & 附件三',
+        title: '高壓以上用電設備「竣工試驗報告(3大合格單位出具)」、「出廠試驗報告」及「保護電驛三項試驗報告」',
+        summary: '檢附法定3類單位出具之竣工試驗報告、原製造廠家/認可機構出廠試驗報告，以及斷路器保護電驛之特性、跳脫、接線試驗報告。',
+        basis: '要點五(二)、附件三第3及9點、附件二之一',
+        levels: ['hv', 'ehv'],
+        opt: null,
+        subItems: [
+          '1. 【竣工試驗報告出具單位確認】確認由：(1)中央主管機關或其認可之檢驗機構、(2)登記合格之用電設備檢驗維護業、或 (3)監造電機技師之執業機構或所屬機關 出具（依用戶用電設備檢驗辦法第15條基準）。',
+          '2. 【高壓設備出廠/型式試驗報告】查對「經濟部認可檢驗機構與原製造廠家及高壓用電設備施行試驗作業要點」規定之變壓器、PT、CT、CB、LA、熔絲、GIS、高壓配電盤試驗報告齊全。',
+          '3. 【保護電驛三項試驗報告】高壓以上以斷路器保護者，檢附各保護電驛之「特性試驗」、「跳脫試驗」及「接線試驗」報告，併於竣工報告單提送。',
+          '4. 【主保護電驛標置核對】核對現場主保護電驛標置已依台電圖審結果通知書（附件二之一「主保護電驛設定一覽表」）之設定值標置完妥。',
+          '5. 【圖審更正要點核對】若審圖時附有「設計資料更正要點（附件二之二）」，已逐項核對修正完妥。'
+        ]
+      },
+
+      // ==================== 第三類：現場自主檢查與測試要點（附件三、表A/B、表C） ====================
+      {
+        id: 'c_self_9items',
+        group: 'self',
+        groupTitle: '參、承裝業／監造技師「現場自主檢查與測試要點」（附件三、表A/B/C）',
+        badge: '自主檢查核心｜附件三',
+        title: '承裝業或監造者「用電設備自行檢查 9 大項目」（完工後必先自檢）',
+        summary: '用電設備裝設完竣後，承裝業或監造者應先執行絕緣、接地、開關標識、管線大小、用電用途及安全距離等 9 大項自主檢查。',
+        basis: '要點五(一)、附件三第1~9點',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: null,
+        subItems: [
+          '一、絕緣耐壓或絕緣電阻測試（測試數值填列於單線系統圖總開關及各迴路位置）。',
+          '二、各接地點接地電阻之測試（測試數值填列於單線系統圖各接地點位置）。',
+          '三、用電設備竣工試驗報告及「經濟部認可檢驗機構與原製造廠家及高壓用電設備施行試驗作業要點」規定之試驗報告查對。',
+          '四、高低壓開關、高壓設備及標識之查對（確認規格、啟斷容量及盤面警告/迴路名牌標識正確）。',
+          '五、配管、配線種類、大小之查對（確認導線線徑、材質及管徑與單線圖相符）。',
+          '六、用電用途之查對（⚠️ 極重要：確認現場裝設設備與用戶申請用電登記單所列「用途別」相符，用途不符者台電不得送電！）。',
+          '七、安全距離檢查（確認帶電體相對地、相間、與外物距離及配電盤操作空間合規）。',
+          '八、裝置契約用戶之入力容量測試（區營業處已測定並發給試驗紀錄者免再測試）。',
+          '九、高壓以上用戶以斷路器保護者，應測試各電驛之特性試驗、跳脫試驗及接線試驗，並將其試驗報告併於竣工報告單。'
+        ]
+      },
+      {
+        id: 'c_self_tableAB_20',
+        group: 'self',
+        groupTitle: '參、承裝業／監造技師「現場自主檢查與測試要點」（附件三、表A/B/C）',
+        badge: '表A/B必填｜暗管10項 + 一般10項',
+        title: '用電裝置檢查紀錄表：暗管檢查（10項）＆ 一般檢查（10項）逐項打勾確認',
+        summary: '填報竣工報告單（表A或表B）正面之「用電裝置檢查紀錄表」，針對暗管工程與一般明管/電表/特殊場所/合格標識進行逐項勾稽。',
+        basis: '附件四表A / 表B 正面檢查紀錄表',
+        levels: ['lv', 'hv', 'ehv'],
+        opt: null,
+        subItems: [
+          '【暗管檢查 1】使用金屬管或非金屬管確認。',
+          '【暗管檢查 2】線管及配件是否符合規格。',
+          '【暗管檢查 3】線管之連接是否符合規定。',
+          '【暗管檢查 4】線管對配件之連接是否符合規定。',
+          '【暗管檢查 5】線管之彎曲是否符合規定。',
+          '【暗管檢查 6】金屬管及配件有無施行接地、有無緊密啣接。',
+          '【暗管檢查 7】塑膠管(PVC管)之連接有無使用伸縮接頭。',
+          '【暗管檢查 8】導線管中之線徑是否符合規定。',
+          '【暗管檢查 9】隱蔽處所之一切裝置是否符合規定。',
+          '【暗管檢查 10】暗管其他記事。',
+          '【一般檢查 1】進屋管（金屬管 / PVC管）有無防水措施（如防水彎頭）。',
+          '【一般檢查 2】電表位置、高度是否適當（含使用中央空調系統之能源用戶是否依中央空調電表及線路裝置規則辦理）。',
+          '【一般檢查 3】現場裝置與設計圖是否相符（含自備緊急電源與台電電源間連絡開關 ATS 互鎖裝置是否適當）。',
+          '【一般檢查 4】未先送審之設計圖是否符合規定（表A）／ 設計圖是否已審查並符合規定（表B）。',
+          '【一般檢查 5】導線相互間及外物間隔距離有無符合規定。',
+          '【一般檢查 6】導線連接及線端出線有無照規定處理。',
+          '【一般檢查 7】設施於特殊場所（如塵埃、危險氣體防爆場所等）有無按規定裝置。',
+          '【一般檢查 8】內線器材有無採用檢驗合格標識或自願性產品驗證（VPC）標識。',
+          '【一般檢查 9】設戶是否符合規定（責任分界點及進屋線引接是否適當）。',
+          '【一般檢查 10】一般檢查其他記事。'
+        ]
+      },
+      {
+        id: 'c_ehv_tableC',
+        group: 'self',
+        groupTitle: '參、承裝業／監造技師「現場自主檢查與測試要點」（附件三、表A/B/C）',
+        badge: '特高壓變電所必附｜附件四表C',
+        title: '【特高壓自備變電所】自備變電所竣工檢查表（附件四表C，共 15 大項完整查驗）',
+        summary: '特高壓以上自備變電所報竣工必附表C，由電機技師(檢查人員)、承裝業(施工單位)及用戶共同簽章，完成15大類變電設備逐項打勾(✓)查驗。',
+        basis: '附件四第2點、附件四表C (第17~19頁)',
+        levels: ['ehv'],
+        opt: null,
+        subItems: [
+          '一、一般配置：(1)一次側相間距、導線規範、導線連接；(2)二次側相間距、導線規範、導線連接；(3)機器設備相關位置正確。',
+          '二、變壓器：(1)冷卻風扇電源電壓/導線/過電流保護、自動啟停溫度設定、手動啟停；(2)溫度計指示、輔助接點、油位指示；(3)保護裝置：突壓電驛、釋壓電驛、低油面警報、過溫警報、警報系統接線；(4)氮封裝置：氮氣壓力、呼吸器、壓力表及警報、氮氣分析；(5)BCT：二次側接線、比值選用、極性、短接裝置、接地裝置、控制電纜選用；(6)一二次分接頭選擇；(7)檢驗報告有無及合格；(8)其他：Arcing horn距離、外殼接地、中性點接地、外殼無漏油/生銹/破損。',
+          '三、有載分接頭切換裝置(OLTC)：(1)切換機構：DC/AC/馬達電源、各表示燈/照明燈/電熱器、軸封、切換器油箱及呼吸器、潤滑油、斷路器或保險絲額定、電磁開關；(2)手動控制：手動/電動升降壓、分接頭指示器、計數器、上下極限開關、閉鎖開關、馬達始動與制動；(3)自動控制：電壓調整電驛、昇降壓動作、變動幅度標置、基準電壓標置、線路補償器極性開關與xy電驛標置值、CT接線、PT電源極性與相序；(4)檢驗報告有無及合格。',
+          '四、斷路器(CB)及馬達操作之空斷開關：(1)控制箱機件：DC/AC電源及接線、導線及熔絲、馬達及制動器、空壓機及氣壓、彈簧情形、電熱器、補助接點、X/Y輔助電驛、照標準圖面接線及編號、潤滑油及無生銹；(2)控制情況：電動閉跳、配電盤手動控制、保護跳脫、現場手動閉跳、自由跳脫裝置、表示燈指示、開閉表示器、各項警報器；(3)BCT二次接線/比值/極性/短接/控制電纜；(4)其他：套管油面計、套管放電間隙、昇降或移動裝置、基礎及基礎螺絲、外殼無漏油生銹、接地；(5)斷路器檢驗報告有無及合格。',
+          '五、空斷開關(ABS)、分段開關及電力熔絲：(1)空斷開關操作機件、各相接觸、操作架接地、附屬接地開關；(2)分段開關各相接觸、操作情況、操作桿；(3)電力熔絲廠牌編號、熔絲備品、操作方便；(4)檢驗報告有無及合格。',
+          '六、比流器(CT)及比壓器(PT)：(1)一次接線、二次接線方式及接線箱、極性、控制電纜選用；(2)容量與負載配合、比值選用；(3)外殼無漏油生銹；(4)檢驗報告有無及合格。',
+          '七、氣封開關設備(GIS)：(1)操作箱：DC/AC電源、熔絲、馬達制動器、空壓機氣壓、彈簧、濕控開關/電熱器、補助接點、計數器、CB/DS/ES表示燈、故障指示器、緊急跳脫、各種互鎖裝置；(2)操作情況：CB/DS/ES手動與電動跳脫及閉合試驗、自由跳脫試驗、表示燈、開閉指示器、警報器；(3)變比器CT/PT接線；(4)六氟化硫(SF6)氣體：含水量、露點測試、洩漏試驗、壓力警報、閉鎖警報；(5)防塵防濕防水、焊接墊圈管路、機構箱蓋、基礎螺絲、外殼無漏油生銹、接地裝置；(6)開關設備檢驗報告有無及合格。',
+          '八、控制盤、電驛與電表：(1)DC/AC電源、熔絲及導線選用；(2)控制開關操作標示及信號燈、操作情形、接線；(3)電驛：標置、動作表示及警報、方向性、特性試驗報告、跳脫試驗報告、接線試驗報告；(4)電表：刻度、指示、接線、切換開關、試驗報告有無及合格；(5)機內配線及控制電纜：導線/電纜選用、絕緣、編號及掛牌、有無竣工接線圖。',
+          '九、蓄電池及充電機：(1)蓄電池：AH額定、DC電壓、導線選用；(2)充電機：額定電壓電流、導線/開關/熔絲選用、熔絲備品、Floating Charge(浮充)情況、保護設備良否。',
+          '十、電容器：接線、開關設備、熔絲、自動控制設備及標置、人員安全設備、檢驗報告有無及合格。',
+          '十一、接地系統及避雷裝置：(1)接地系統：接地電阻值、機器設備接地、屋內機器接地與屋外地網之連接、接地網竣工圖；(2)避雷裝置：避雷器接地、架空避雷管及架空接地線之接地與配置、避雷器檢驗報告有無及合格。',
+          '十二、所內變壓器：(1)容量、一二次電壓、一次斷路器切斷值選用、裝設位置；(2)開關及熔絲選用、導線選用、開關箱配線；(3)外燈照明適當、裝置位置。',
+          '十三、通訊設備：調度電話、防情電話。',
+          '十四、其他：(1)安全隔離設備；(2)圖面、資料及特殊設備之操作維護說明；(3)操作機件安全鎖、機器號碼牌。',
+          '十五、現場裝置與設計資料或有關規定不符項目檢討說明（1~9項逐點填列）。'
+        ]
+      },
+
+      // ==================== 第四類：特高壓自備變電所／汽電共生「加入系統調度操作準則」（附件六） ====================
+      {
+        id: 'c_ehv_6months',
+        group: 'dispatch',
+        groupTitle: '肆、特高壓自備變電所／汽電共生「加入系統調度操作準則」應辦事項（附件六）',
+        badge: '加入系統半年前｜附件六第8點',
+        title: '【加入系統半年前】函送單線圖至台電統一編訂「電源線及高壓端開關設備號碼」',
+        summary: '新加入之電源線及高壓端開關設備號碼，須於加入台電系統半年前將單線圖函送台電相關單位，依『開關號碼編訂原則』統一編訂。',
+        basis: '附件六第8點',
+        levels: ['ehv'],
+        opt: null,
+        subItems: [
+          '1. 於預定加入台電系統 6 個月前，將自備變電所（含汽電共生發電機組）單線系統圖函送台電相關單位。',
+          '2. 收到台電依據『開關號碼編訂原則』函知之開關號碼後，更新於竣工單線圖及現場機器號碼牌（表C第14項）。'
+        ]
+      },
+      {
+        id: 'c_ehv_20days_forms',
+        group: 'dispatch',
+        groupTitle: '肆、特高壓自備變電所／汽電共生「加入系統調度操作準則」應辦事項（附件六）',
+        badge: '加入系統 20 日前必辦｜附件六第2點',
+        title: '【加入系統 20 日前】完成報竣工並提送「附件六之一～六之五」聲明書與會驗申請書',
+        summary: '於加入系統20日前向所轄台電區營業處提出申請，檢附試送電方式聲明書、設備試驗合格聲明書、各項試驗合格表及調度電話/監控會驗申請書。',
+        basis: '要點五(四)、附件六 2-1 ~ 2-5、附件六之一~六之五',
+        levels: ['ehv'],
+        opt: null,
+        subItems: [
+          '1. 【附件六之一：供電線路試送電方式聲明書】（既設變電所免填）用戶須於聲明書內擇一打「V」：(A)線路跳脫後同意台電「不須」經聯絡用戶即可立即執行試送電一次；或 (B)台電「須」經聯絡用戶方可執行試送電（調度專用電話須隨時保持暢通）。具承諾書者及負責人、電氣負責人簽章。',
+          '2. 【附件六之二：供電設備試驗合格聲明書】聲明新(修)設備各項相關試驗皆已完成並合格，由公司負責人及電氣負責人簽章（若無法依限提出，可俟試驗合格後補送區營業處）。',
+          '3. 【附件六之三：各項試驗合格表】針對「輸電線路(電源線或用戶專線)」、「電力變壓器（含絕緣、耐壓、遞升加壓試驗、保護電驛特性/接線/跳脫試驗、廠牌標置與圖審相符確認、校驗保護電驛用之短路試驗）」及「斷路器（絕緣、耐壓試驗）」由試驗者於空格內簽章並註明日期。',
+          '4. 【附件六之四：電力調度電話與調度監控設備(RTU/DTM)會驗申請書】（1式3聯，既設變電所免填）填寫預定供電日期、供電方式、專用電話號碼、專線電話信號及RTU/DTM安裝地點，送區營業處會驗。',
+          '5. 【附件六之五：停止要求書】（如因施工或安全關係，須停止供電中之設備時一併辦理）填寫停止區間或設備、預定時間、操作程序及保護電驛標置變更或閉鎖配合工作。'
+        ]
+      },
+      {
+        id: 'c_ehv_20days_techdata',
+        group: 'dispatch',
+        groupTitle: '肆、特高壓自備變電所／汽電共生「加入系統調度操作準則」應辦事項（附件六）',
+        badge: '加入系統 20 日前必辦｜附表一~三',
+        title: '【加入系統 20 日前】提供區營業處代填「加入系統送電要求書（附表一）」所需之 4 大技術資料',
+        summary: '配合區營業處代填「附表一 加入系統送電要求書」轉送調度單位，業者須提供用戶專線常數表、電纜電流表、保護電驛、主變特性比較表及斷路器銘牌報告。',
+        basis: '附件六 2-2 & 3-2、附表一、附表二、附表三',
+        levels: ['ehv'],
+        opt: null,
+        subItems: [
+          '1. 【(1) 用戶專線(輸電線路)資料】填入線路(含分歧線)名稱、線徑、長度及「線路常數表（附表二：單回線/雙回線正相阻抗、零相阻抗、導納、互耦阻抗等）」並檢附線路常數試驗報告（100公尺以內架空線得提供理論值）。如含電纜線路，須另檢附「電纜線路容許運轉電流表（常時間及1/3/5/10小時短時間容許電流，考慮損失率0.8）」。',
+          '2. 【(2) 保護電驛資料】提供電驛名稱、編號、型式、廠家、比流器(CT)可選用比值、比壓器(PT)規範。',
+          '3. 【(3) 電力變壓器資料】提供電壓(kV)、容量(MVA)、開路試驗(鐵損kW、激磁電流%)、短路試驗(銅損kW、阻抗壓降百分比、百分阻抗值)，並檢附「變壓器銘牌」、「變壓器特性比較表（附表三：損失、激磁電流、效率、各分接頭壓降百分比保證值與測試值比較、電壓調整率）」與「廠家出廠短路試驗報告」。',
+          '4. 【(4) 斷路器資料】提供「斷路器銘牌」及「廠家出廠短路試驗報告」。※銘牌內須註明：製造廠家、型號、種類、額定電壓(kV)、額定電流(A)、對稱啟斷電流值(kA及對應電壓)、啟斷時間、接觸子開啟時間、非對稱能力及電壓範圍因數等。',
+          '5. 【附表一紅線圖面規定】加入設備略圖或附圖中，「新設或改善部分請用紅色繪製」。'
+        ]
+      },
+      {
+        id: 'c_ehv_cogen_models',
+        group: 'dispatch',
+        groupTitle: '肆、特高壓自備變電所／汽電共生「加入系統調度操作準則」應辦事項（附件六）',
+        badge: '汽電共生專屬｜附表四~十二 & 附圖一',
+        title: '【汽電共生發電機組必備】發電機、激磁機、原動機、調速機常數與數學模型資料（附表四～十二）及 RTU 裝設',
+        summary: '汽電共生併聯用戶須提供發電機組常數、飽和曲線、容量曲線圖，機組達 95MVA(含)以上須另附適用美國 PTI 公司 PSS/E 程式之 IEEE 標準數學模型與方塊圖。',
+        basis: '附件六 3-2(5) & 第6點、附表四~十二、附圖一',
+        levels: ['hv', 'ehv'],
+        opt: 'cogen',
+        subItems: [
+          '1. 【附表四 & 附表五】提供「發電機常數表（附表四）」及「發電機模型資料表（附表五：額定運轉資料、直軸d-axis與交軸q-axis同步/暫態/次暫態電抗非飽和與飽和值、時間常數、飽和曲線資料、阻尼係數D）」。',
+          '2. 【附表四下半部】提供「激磁機(Exciter)、原動機(Prime Mover)、調速機(Governor)常數表」。',
+          '3. 【95MVA(含)以上機組必附詳細數學模型（附表六～十二）】須另附能適用美國 PTI 公司 PSS/E 程式之 IEEE 標準模型資料與方塊圖：包含激磁機模型（附表六 IEEE Type 1、附表七）及調速機模型（擇一填寫：附表八 IEEE標準調速機、附表九 汽輪調速機、附表十 氣渦輪調速機、附表十一 水輪調速機、附表十二 並聯式渦輪調速機）。',
+          '4. 【單線圖與容量曲線圖】提供「發電廠內單線圖」、「開關場內單線圖」及「發電機容量曲線圖（Capability Curve，如附圖一標示 OEL/UEL 限制線）」。',
+          '5. 【遙測監視設備(RTU/DTM)測試良好】依「汽電共生系統規定」裝設遙測監視設備，並須於送電前經台電相關調度單位測試良好，否則設備不得加入台電系統（附件六第6點）。'
+        ]
+      },
+      {
+        id: 'c_ehv_14days_seq',
+        group: 'dispatch',
+        groupTitle: '肆、特高壓自備變電所／汽電共生「加入系統調度操作準則」應辦事項（附件六）',
+        badge: '加入系統 2 星期前｜附件六第9點',
+        title: '【加入系統 14 日前】編擬「加入系統操作順序表（附表十三）」送達台電調度單位審查 & 現場專線電話完妥',
+        summary: '於加入台電系統二星期前編擬附表十三送達調度單位審查；並確認控制室「電力調度專用電話」及「民防防情專線電話與遮光設備」皆已測試審查合格。',
+        basis: '附件六第4、5、9點、附表十三、附件六之三註',
+        levels: ['ehv'],
+        opt: null,
+        subItems: [
+          '1. 【附表十三：加入系統操作順序表（2星期前送達）】按順序編擬操作目的、時間、地點、操作內容及備註，內容須包含：短路試驗、變壓器遞升加壓試驗、併聯前系統狀況、停電區域、安全防範措施等。',
+          '2. 【控制室「電力調度專用電話」試話良好（附件六第4點）】新建或遷建之自備變電所(含汽電共生)控制室須裝設電力調度專用電話：該電話不得他用、應具備「話中插接」功能、不得經由自備變電所總機轉接，並須於送電前經台電調度單位試話良好，否則不得加入系統。',
+          '3. 【民防「防情專線電話及遮光設備」審查（附件六第5點）】新建或遷建自備變電所(含汽電共生)需與所在地民防單位架設防情專線電話及在控制室裝置遮光設備，先由當地民防單位辦理審查作業，再由台電辦理相關檢驗作業。',
+          '4. 【加入系統後 7 日內補送報告（附件六之三附註）】保護電驛之「接線試驗合格報告」，應於設備加入系統後 7 日內補送台電公司。'
+        ]
+      }
+    ];
+
+    // 3. 系統狀態管理
+    let contractorState = {
+      currentTab: 'overview',
+      voltageLevel: 'hv', // 'lv' | 'hv' | 'ehv'
+      fontScale: 115, // 預設採用 115% 舒適大字，避免閱讀吃力
+      printFontSize: '12.5pt', // 列印預設舒適大字
+      options: {
+        ev: true,
+        pe: true,
+        deviceContract: false,
+        multiHouse: false,
+        cogen: false
+      },
+      meta: {
+        user: '台灣精密科技股份有限公司（新建廠房用電工程）',
+        no: '台北北區營業處 / 受理號 115-08921',
+        contractor: '永安機電工程有限公司（甲級承裝業）',
+        engineer: '林大華 電機技師 / 契約容量 1,200 kW',
+        targetDate: getOffsetDateStr(28)
+      },
+      // 記錄每張卡片的勾稽狀態、備註、是否展開細項、是否納入列印
+      cardStates: {}
+    };
+
+    // 全站字體大小調整邏輯 (90% ~ 160%)
+    function setFontScale(scaleVal, silent = false) {
+      let scale = parseInt(scaleVal, 10);
+      if (isNaN(scale)) scale = 115;
+      scale = Math.max(90, Math.min(160, scale));
+      contractorState.fontScale = scale;
+
+      // 以 16px 為 100% 基準換算根字級
+      const px = ((16 * scale) / 100).toFixed(2);
+      document.documentElement.style.setProperty('--base-font-size', `${px}px`);
+
+      const slider = document.getElementById('fontScaleSlider');
+      if (slider) slider.value = scale;
+      const lbl = document.getElementById('fontScaleLabel');
+      if (lbl) lbl.textContent = `${scale}%`;
+
+      // 更新預設按鈕高亮狀態
+      [100, 115, 130, 145].forEach(preset => {
+        const btn = document.getElementById(`fontBtn_${preset}`);
+        if (!btn) return;
+        if (scale === preset) {
+          btn.className = 'px-2 py-1 rounded text-xs font-bold transition bg-amber-400 text-slate-950 shadow';
+        } else {
+          btn.className = 'px-2 py-1 rounded text-xs font-bold transition bg-slate-700 text-slate-200 hover:bg-slate-600';
+        }
+      });
+
+      saveContractorStorage();
+      if (!silent) {
+        showToast(`已將網頁文字大小調整為 ${scale}%`);
+      }
+    }
+
+    function stepFontScale(delta) {
+      setFontScale((contractorState.fontScale || 115) + delta);
+    }
+
+    // 列印專用字體大小調整
+    function updatePrintFontSize(ptVal) {
+      contractorState.printFontSize = ptVal;
+      document.documentElement.style.setProperty('--print-font-size', ptVal);
+      const previewBox = document.getElementById('printPreviewBox');
+      if (previewBox) {
+        previewBox.style.fontSize = ptVal;
+      }
+      saveContractorStorage();
+      renderPrintDocument();
+      showToast(`已將 A4 列印字體設為 ${ptVal}`);
+    }
+
+    function getOffsetDateStr(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.toISOString().split('T')[0];
+    }
+
+    function initCardStates() {
+      CONTRACTOR_CARDS_DB.forEach(c => {
+        if (!contractorState.cardStates[c.id]) {
+          contractorState.cardStates[c.id] = {
+            status: 'pending', // 'pending' | 'ok' | 'issue'
+            note: '',
+            expanded: false,
+            print: true
+          };
+        }
+      });
+    }
+
+    function loadContractorStorage() {
+      try {
+        const raw = localStorage.getItem('taipower_contractor_v2');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          contractorState = { ...contractorState, ...parsed };
+        }
+      } catch (e) {
+        console.warn('無法載入本地儲存狀態', e);
+      }
+      initCardStates();
+    }
+
+    function saveContractorStorage() {
+      try {
+        localStorage.setItem('taipower_contractor_v2', JSON.stringify(contractorState));
+      } catch (e) {
+        console.warn('無法寫入本地儲存狀態', e);
+      }
+    }
+
+    // 浮動提示訊息 (取代 alert)
+    function showToast(msg, type = 'info') {
+      const box = document.getElementById('toastContainer');
+      const el = document.createElement('div');
+      const bg = type === 'success' ? 'bg-emerald-700 border-emerald-500' : 'bg-slate-800 border-slate-600';
+      el.className = `${bg} text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg border flex items-center gap-2 transition-all duration-300 pointer-events-auto`;
+      el.innerHTML = `<i class="fa-solid fa-circle-check text-amber-300"></i><span>${msg}</span>`;
+      box.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 300);
+      }, 2800);
+    }
+
+    // 切換頂部四大分頁
+    function switchTab(tab) {
+      contractorState.currentTab = tab;
+      const tabs = ['overview', 'guide', 'print', 'tools'];
+      tabs.forEach(t => {
+        const section = document.getElementById(`tabContent_${t}`);
+        const btn = document.getElementById(`tabBtn_${t}`);
+        if (t === tab) {
+          section.classList.remove('hidden');
+          btn.className = 'tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2 bg-amber-400 text-slate-950 shadow-sm';
+        } else {
+          section.classList.add('hidden');
+          btn.className = 'tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2 text-slate-300 hover:bg-slate-700/60 hover:text-white';
+        }
+      });
+
+      if (tab === 'print') {
+        renderPrintDocument();
+      }
+    }
+
+    // 分頁1：點擊展開/切換四大流程階段說明抽屜
+    let activeFlowKey = null;
+    function toggleFlowDetail(key) {
+      const drawer = document.getElementById('flowDetailDrawer');
+      if (activeFlowKey === key && !drawer.classList.contains('hidden')) {
+        drawer.classList.add('hidden');
+        activeFlowKey = null;
+        return;
+      }
+      activeFlowKey = key;
+      const d = FLOW_STAGE_DATA[key];
+      drawer.classList.remove('hidden');
+      drawer.innerHTML = `
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2.5 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">${d.badge}</span>
+            <h4 class="font-bold text-slate-900 text-sm sm:text-base">${d.title}</h4>
+          </div>
+          <button onclick="document.getElementById('flowDetailDrawer').classList.add('hidden')" class="text-xs text-slate-500 hover:text-slate-800 px-2 py-1">
+            <i class="fa-solid fa-xmark mr-1"></i>收合細節
+          </button>
+        </div>
+        ${d.content}
+      `;
+    }
+
+    // 分頁1：展開/收合 4 大通則手風琴細節
+    function toggleRuleAccordion(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('hidden');
+      }
+    }
+
+    // 分頁2：選擇電壓等級 (lv / hv / ehv)
+    function selectVoltageLevel(level) {
+      contractorState.voltageLevel = level;
+
+      // 依電壓等級自動切換特高壓調度列印區塊
+      document.getElementById('pSec_dispatch').checked = (level === 'ehv' || contractorState.options.cogen);
+
+      updateVoltageLevelUI();
+      renderContractorCards();
+      saveContractorStorage();
+      renderPrintDocument();
+
+      const names = {
+        lv: '低壓供電用戶（附件四表A）',
+        hv: '高壓供電用戶（附件四表B）',
+        ehv: '特高壓自備變電所／汽電共生（表B + 表C + 附件六）'
+      };
+      showToast(`已切換至「${names[level]}」應備文件與自主檢查清單`);
+    }
+
+    function updateVoltageLevelUI() {
+      const levels = ['lv', 'hv', 'ehv'];
+      levels.forEach(l => {
+        const card = document.getElementById(`vCard_${l}`);
+        if (l === contractorState.voltageLevel) {
+          card.className = 'text-left p-4 rounded-xl border-2 border-sky-600 bg-sky-50/70 shadow-sm transition';
+        } else {
+          card.className = 'text-left p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 transition';
+        }
+      });
+
+      // 控制特定附加條件顯示與否
+      document.getElementById('opt_multiHouse_wrap').style.display = (contractorState.voltageLevel === 'lv') ? 'flex' : 'none';
+      document.getElementById('opt_cogen_wrap').style.display = (contractorState.voltageLevel !== 'lv') ? 'flex' : 'none';
+
+      const levelLabels = {
+        lv: '低壓供電用戶（適用附件四表A）',
+        hv: '高壓供電用戶（適用附件四表B）',
+        ehv: '特高壓自備變電所／汽電共生（適用表B、表C及附件六）'
+      };
+      const lbl = document.getElementById('printLevelLabel');
+      if (lbl) lbl.textContent = levelLabels[contractorState.voltageLevel];
+    }
+
+    function updateOptions() {
+      contractorState.options.ev = document.getElementById('opt_ev').checked;
+      contractorState.options.pe = document.getElementById('opt_pe').checked;
+      contractorState.options.deviceContract = document.getElementById('opt_deviceContract').checked;
+      contractorState.options.multiHouse = document.getElementById('opt_multiHouse').checked;
+      contractorState.options.cogen = document.getElementById('opt_cogen').checked;
+
+      renderContractorCards();
+      saveContractorStorage();
+      renderPrintDocument();
+    }
+
+    // 判斷卡片是否適用於當前所選之電壓等級與附加條件
+    function isCardApplicable(card) {
+      if (!card.levels.includes(contractorState.voltageLevel)) return false;
+      if (!card.opt) return true;
+      return !!contractorState.options[card.opt];
+    }
+
+    // 渲染分頁2：架構式應備文件與自主檢查卡片（細節預設收合，點擊才展開）
+    function renderContractorCards() {
+      const container = document.getElementById('contractorCardsContainer');
+      const groups = [
+        { key: 'common', icon: 'fa-stamp', color: 'sky' },
+        { key: 'docs', icon: 'fa-folder-open', color: 'emerald' },
+        { key: 'self', icon: 'fa-clipboard-check', color: 'amber' },
+        { key: 'dispatch', icon: 'fa-tower-broadcast', color: 'purple' }
+      ];
+
+      let html = '';
+      let totalCount = 0;
+      let doneCount = 0;
+
+      groups.forEach(g => {
+        const cards = CONTRACTOR_CARDS_DB.filter(c => c.group === g.key && isCardApplicable(c));
+        if (cards.length === 0) return;
+
+        const groupTitle = cards[0].groupTitle;
+
+        html += `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b-2 border-slate-200 pb-2">
+              <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                <i class="fa-solid ${g.icon} text-sky-700"></i>
+                <span>${groupTitle}</span>
+              </h3>
+              <span class="text-xs font-semibold text-slate-500">本區塊共 ${cards.length} 項重點</span>
+            </div>
+            <div class="grid grid-cols-1 gap-3.5">
+        `;
+
+        cards.forEach(card => {
+          const st = contractorState.cardStates[card.id] || { status: 'pending', note: '', expanded: false, print: true };
+          totalCount++;
+          if (st.status === 'ok') doneCount++;
+
+          const borderClass = st.status === 'ok'
+            ? 'border-emerald-500 bg-emerald-50/20'
+            : st.status === 'issue'
+              ? 'border-rose-400 bg-rose-50/20'
+              : 'border-slate-200 bg-white';
+
+          html += `
+            <div class="rounded-xl border-2 ${borderClass} shadow-sm transition overflow-hidden">
+              <!-- 架構主卡片區（永遠顯示大綱） -->
+              <div class="p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div class="space-y-1.5 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-slate-800 text-white">${card.badge}</span>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">${card.title}</h4>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${card.summary}</p>
+                  <div class="flex flex-wrap items-center gap-4 pt-1">
+                    <button type="button" onclick="toggleCardDetail('${card.id}')" class="text-xs font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 px-3 py-1 rounded-lg border border-sky-200 transition">
+                      <i class="fa-solid ${st.expanded ? 'fa-chevron-up' : 'fa-list-ul'}"></i>
+                      <span>${st.expanded ? '收合細項清單' : `點此展開查看細項與法規要求 (${card.subItems.length} 項)`}</span>
+                    </button>
+                    <span class="text-[11px] text-slate-400">法源依據：${card.basis}</span>
+                  </div>
+                </div>
+
+                <!-- 右側：業者自主勾稽按鈕、備註與列印設定 -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+                  <div class="inline-flex rounded-lg border border-slate-300 bg-white p-0.5">
+                    <button type="button" onclick="setCardStatus('${card.id}', 'ok')" class="px-3 py-1.5 rounded-md text-xs font-bold transition ${st.status === 'ok' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+                      ✓ 已備齊/合格
+                    </button>
+                    <button type="button" onclick="setCardStatus('${card.id}', 'issue')" class="px-3 py-1.5 rounded-md text-xs font-bold transition ${st.status === 'issue' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+                      ✗ 待補/待辦
+                    </button>
+                  </div>
+
+                  <input type="text" value="${escapeHtml(st.note)}" oninput="setCardNote('${card.id}', this.value)" placeholder="填寫實測數據或備註..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-600 outline-none w-full sm:w-48 bg-white">
+
+                  <label class="flex items-center gap-1 text-xs text-slate-600 cursor-pointer select-none px-2 py-1.5 rounded hover:bg-slate-100" title="勾選後納入列印勾稽表">
+                    <input type="checkbox" ${st.print ? 'checked' : ''} onchange="setCardPrint('${card.id}', this.checked)" class="rounded text-sky-700">
+                    <span>🖨️ 列印</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- 漸進式展開之細項清單 (預設隱藏，點擊後展開) -->
+              <div id="detail_${card.id}" class="${st.expanded ? '' : 'hidden'} bg-slate-50 border-t border-slate-200 px-5 py-4">
+                <div class="text-xs font-bold text-slate-700 mb-2 flex items-center justify-between">
+                  <span>📋 細項查核點與法規明細（可於列印中心設定是否一併印出細項）：</span>
+                  <button onclick="toggleCardDetail('${card.id}')" class="text-slate-500 hover:text-slate-800"><i class="fa-solid fa-xmark mr-1"></i>收合</button>
+                </div>
+                <ul class="space-y-1.5 text-xs text-slate-700 leading-relaxed">
+                  ${card.subItems.map(sub => `
+                    <li class="flex items-start gap-2 bg-white p-2 rounded border border-slate-200/80">
+                      <i class="fa-regular fa-square-check text-sky-700 mt-0.5 shrink-0"></i>
+                      <span>${sub}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+
+      // 更新頂部進度條
+      const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+      document.getElementById('headerProgressText').textContent = `${doneCount} / ${totalCount} 項 (${pct}%)`;
+      document.getElementById('headerProgressBar').style.width = `${pct}%`;
+    }
+
+    function toggleCardDetail(cardId) {
+      const st = contractorState.cardStates[cardId];
+      if (st) {
+        st.expanded = !st.expanded;
+        saveContractorStorage();
+        renderContractorCards();
+      }
+    }
+
+    function expandAllCards(expand) {
+      CONTRACTOR_CARDS_DB.forEach(c => {
+        if (isCardApplicable(c) && contractorState.cardStates[c.id]) {
+          contractorState.cardStates[c.id].expanded = expand;
+        }
+      });
+      saveContractorStorage();
+      renderContractorCards();
+    }
+
+    function setCardStatus(cardId, status) {
+      const st = contractorState.cardStates[cardId];
+      if (st) {
+        st.status = (st.status === status) ? 'pending' : status;
+        saveContractorStorage();
+        renderContractorCards();
+        renderPrintDocument();
+      }
+    }
+
+    function setCardNote(cardId, note) {
+      if (contractorState.cardStates[cardId]) {
+        contractorState.cardStates[cardId].note = note;
+        saveContractorStorage();
+        renderPrintDocument();
+      }
+    }
+
+    function setCardPrint(cardId, checked) {
+      if (contractorState.cardStates[cardId]) {
+        contractorState.cardStates[cardId].print = checked;
+        saveContractorStorage();
+        renderPrintDocument();
+      }
+    }
+
+    function batchMarkStatus(status) {
+      CONTRACTOR_CARDS_DB.forEach(c => {
+        if (isCardApplicable(c) && contractorState.cardStates[c.id]) {
+          contractorState.cardStates[c.id].status = status;
+        }
+      });
+      saveContractorStorage();
+      renderContractorCards();
+      renderPrintDocument();
+      showToast(status === 'ok' ? '已將本頁所有適用項目設為「已備齊/合格」' : '已重置檢核狀態', 'success');
+    }
+
+    // 分頁3：產生業者專用 A4 勾稽表預覽與列印內容
+    function saveMetaAndRefreshPrint() {
+      contractorState.meta.user = document.getElementById('pMeta_user').value;
+      contractorState.meta.no = document.getElementById('pMeta_no').value;
+      contractorState.meta.contractor = document.getElementById('pMeta_contractor').value;
+      contractorState.meta.engineer = document.getElementById('pMeta_engineer').value;
+      saveContractorStorage();
+      renderPrintDocument();
+    }
+
+    function renderPrintDocument() {
+      const printMode = document.querySelector('input[name="printMode"]:checked')?.value || 'all';
+      const includeSub = document.getElementById('printIncludeSubItems').checked;
+      const showHeader = document.getElementById('pSec_header').checked;
+      const showCommon = document.getElementById('pSec_common').checked;
+      const showDocs = document.getElementById('pSec_docs').checked;
+      const showSelf = document.getElementById('pSec_self').checked;
+      const showDispatch = document.getElementById('pSec_dispatch').checked;
+      const showSign = document.getElementById('pSec_sign').checked;
+
+      const levelTitleMap = {
+        lv: '低壓供電用戶（適用附件四表A）',
+        hv: '高壓供電用戶（適用附件四表B）',
+        ehv: '特高壓用戶－自備變電所／汽電共生（適用附件四表B、表C及附件六）'
+      };
+
+      let html = `
+        <div class="space-y-4 text-black">
+          <!-- 表單標題 -->
+          <div class="text-center border-b-2 border-black pb-2.5">
+            <h1 class="text-lg sm:text-xl font-bold tracking-wide">新增設用戶用電設備「報竣工應備文件與自主檢查」業者勾稽表</h1>
+            <p class="text-xs text-slate-700 mt-1">
+              依據台電115年10月1日修正「新增設用戶用電設備檢驗要點」編製 ｜ 適用對象：<strong>${levelTitleMap[contractorState.voltageLevel]}</strong>
+            </p>
+          </div>
+      `;
+
+      // 1. 工程基本資料表頭
+      if (showHeader) {
+        html += `
+          <table class="w-full text-xs border-collapse border border-black print-table">
+            <tbody>
+              <tr>
+                <td class="bg-slate-100 font-bold w-32 border border-black">用戶 / 工程名稱</td>
+                <td class="border border-black w-1/3">${escapeHtml(contractorState.meta.user)}</td>
+                <td class="bg-slate-100 font-bold w-32 border border-black">區處 / 受理號或電號</td>
+                <td class="border border-black">${escapeHtml(contractorState.meta.no)}</td>
+              </tr>
+              <tr>
+                <td class="bg-slate-100 font-bold border border-black">負責施工承裝業</td>
+                <td class="border border-black">${escapeHtml(contractorState.meta.contractor)}</td>
+                <td class="bg-slate-100 font-bold border border-black">監造技師 / 預定送電</td>
+                <td class="border border-black">${escapeHtml(contractorState.meta.engineer)}</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+      }
+
+      // 2. 四大檢核區塊表格
+      const secConfigs = [
+        { enabled: showCommon, key: 'common', title: '壹、共通核心圖面與特殊條件必附文件檢核' },
+        { enabled: showDocs, key: 'docs', title: '貳、報竣工應檢附書面報告與公會證明文件' },
+        { enabled: showSelf, key: 'self', title: '參、承裝業／監造技師現場自主檢查與測試項目（附件三、表A/B/C）' },
+        { enabled: showDispatch, key: 'dispatch', title: '肆、特高壓自備變電所／汽電共生加入系統調度操作準則應辦事項（附件六）' }
+      ];
+
+      secConfigs.forEach(sec => {
+        if (!sec.enabled) return;
+
+        const items = CONTRACTOR_CARDS_DB.filter(c => {
+          if (c.group !== sec.key) return false;
+          if (!isCardApplicable(c)) return false;
+          const st = contractorState.cardStates[c.id] || { status: 'pending', print: true };
+          if (!st.print) return false;
+          if (printMode === 'incomplete' && st.status === 'ok') return false;
+          return true;
+        });
+
+        if (items.length === 0) return;
+
+        html += `
+          <div class="print-break-inside-avoid space-y-1">
+            <h3 class="font-bold text-xs sm:text-sm bg-slate-200 px-2.5 py-1 border-l-4 border-black">${sec.title}</h3>
+            <table class="w-full text-xs border-collapse border border-black print-table">
+              <thead>
+                <tr class="bg-slate-100">
+                  <th class="border border-black w-28 text-left">類別 / 法源</th>
+                  <th class="border border-black text-left">業者應備文件與自主檢查項目${includeSub ? '（含細項查核點）' : ''}</th>
+                  <th class="border border-black w-28 text-center">自主勾稽結果</th>
+                  <th class="border border-black w-40 text-left">實測數據 / 備註</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+
+        items.forEach(card => {
+          const st = contractorState.cardStates[card.id] || { status: 'pending', note: '' };
+          let statusHtml = '';
+          if (printMode === 'blank') {
+            statusHtml = `☐ 已備齊/合格`;
+          } else if (st.status === 'ok') {
+            statusHtml = `<strong>☑ 已備齊/合格</strong>`;
+          } else if (st.status === 'issue') {
+            statusHtml = `<strong class="text-rose-700">☒ 待補/待辦</strong>`;
+          } else {
+            statusHtml = `☐ 待檢核`;
+          }
+
+          const subListHtml = includeSub
+            ? `<ul class="mt-1.5 pl-3 space-y-0.5 text-[10pt] text-slate-700 list-disc">
+                ${card.subItems.map(s => `<li>${s}</li>`).join('')}
+               </ul>`
+            : '';
+
+          html += `
+            <tr>
+              <td class="border border-black align-top">
+                <div class="font-bold">${card.badge}</div>
+                <div class="text-[9.5pt] text-slate-600 mt-0.5">${card.basis}</div>
+              </td>
+              <td class="border border-black align-top">
+                <div class="font-bold text-xs">${card.title}</div>
+                <div class="text-[10pt] text-slate-700 mt-0.5">${card.summary}</div>
+                ${subListHtml}
+              </td>
+              <td class="border border-black text-center align-top whitespace-nowrap pt-2">${statusHtml}</td>
+              <td class="border border-black align-top">${printMode === 'blank' ? '' : escapeHtml(st.note)}</td>
+            </tr>
+          `;
+        });
+
+        html += `
+              </tbody>
+            </table>
+          </div>
+        `;
+      });
+
+      // 3. 業者專用三方簽章欄（移除台電內部核定欄，純供承裝業/技師/用戶確認）
+      if (showSign) {
+        html += `
+          <div class="print-break-inside-avoid pt-2">
+            <table class="w-full text-xs border-collapse border border-black print-table text-center">
+              <thead>
+                <tr class="bg-slate-100">
+                  <th colspan="3" class="border border-black p-1.5 font-bold">
+                    報竣工送件前自主檢查簽章確認（提醒：單線系統圖右下角與竣工報告單之三方印章須完全一致）
+                  </th>
+                </tr>
+                <tr class="bg-slate-50">
+                  <th class="border border-black p-1 w-1/3">負責施工電器承裝業 簽章</th>
+                  <th class="border border-black p-1 w-1/3">設計／監造電機技師 簽章</th>
+                  <th class="border border-black p-1 w-1/3">用戶（業主） 簽章</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="h-20">
+                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">檢查日期：　　年　　月　　日</td>
+                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">簽署日期：　　年　　月　　日</td>
+                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">用印確認</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+
+      document.getElementById('printPreviewBox').innerHTML = html;
+      document.getElementById('actualPrintContainer').innerHTML = html;
+    }
+
+    // 分頁4 工具1：特高壓業者送件時程倒推計算機
+    function calculateContractorTimeline() {
+      const dateStr = document.getElementById('toolTargetDate').value;
+      const box = document.getElementById('contractorTimelineOutput');
+      if (!dateStr) {
+        box.innerHTML = `<p class="text-slate-400">請選擇預定送電日期。</p>`;
+        return;
+      }
+      contractorState.meta.targetDate = dateStr;
+      saveContractorStorage();
+
+      const target = new Date(dateStr + 'T00:00:00');
+      const steps = [
+        {
+          offset: -180,
+          tag: '加入系統半年前 (-180日)',
+          role: '業者必辦',
+          title: '函送單線圖至台電統一編訂「電源線及高壓端開關設備號碼」',
+          desc: '依附件六第8點，由台電依據『開關號碼編訂原則』編訂並函知自備變電所。'
+        },
+        {
+          offset: -20,
+          tag: '加入系統 20 日前 (最遲報竣工日)',
+          role: '業者核心必辦',
+          title: '完成報竣工(表B+表C) ＆ 提送附件六之一~六之四及附表一~十二技術資料',
+          desc: '依要點五(四)及附件六2-1，向所轄台電區營業處提出申請，俾便區處現場檢驗並代填「加入系統送電要求書(附表一)」。',
+          highlight: true
+        },
+        {
+          offset: -14,
+          tag: '加入系統 2 星期前 (-14日)',
+          role: '業者核心必辦',
+          title: '編擬「加入系統操作順序表（附表十三）」送達台電相關調度單位審查',
+          desc: '依附件六第9點，內含短路試驗、變壓器遞升加壓試驗、併聯前系統狀況、停電區域及安全防範措施。',
+          highlight: true
+        },
+        {
+          offset: -5,
+          tag: '送電前 5 日 ~ 3 日',
+          role: '台電通知參考',
+          title: '台電通知保護電驛標置審查結果(-5日)及調度審核結果(-3日) & 完成調度電話/RTU試話測試',
+          desc: '送電前須確認控制室「電力調度專用電話(具話中插接、不經總機)」、民防防情電話與遮光設備及汽電共生RTU皆已測試合格。'
+        },
+        {
+          offset: 7,
+          tag: '加入系統送電後 7 日內 (+7日)',
+          role: '業者後續必辦',
+          title: '補送「保護電驛之接線試驗合格報告」予台電公司',
+          desc: '依附件六之三「各項試驗合格表」附註規定，應於設備加入系統後7日內補送。',
+          highlight: true
+        }
+      ];
+
+      box.innerHTML = steps.map(s => {
+        const d = new Date(target);
+        d.setDate(d.getDate() + s.offset);
+        const ymd = d.toISOString().split('T')[0];
+        return `
+          <div class="p-3 rounded-xl border ${s.highlight ? 'border-purple-300 bg-purple-50/50' : 'border-slate-200 bg-slate-50'} flex items-start justify-between gap-3">
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded ${s.highlight ? 'bg-purple-700 text-white' : 'bg-slate-600 text-white'}">${s.role}</span>
+                <span class="font-bold text-slate-900">${s.tag}</span>
+              </div>
+              <div class="font-semibold text-slate-800 pt-0.5">${s.title}</div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">${s.desc}</p>
+            </div>
+            <div class="font-mono font-bold text-sm text-purple-950 bg-white px-2.5 py-1 rounded border border-purple-200 shrink-0">
+              ${ymd}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 分頁4 工具2：現場裝置與已審妥設計不符自評器
+    function evalDiffCase() {
+      const val = document.querySelector('input[name="diffCase"]:checked')?.value || 'case1';
+      const box = document.getElementById('diffCaseResult');
+
+      if (val === 'case1') {
+        box.className = 'p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-950';
+        box.innerHTML = `
+          <div class="font-bold text-sm flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+            <span>建議作法：可直接報竣工，並於「竣工報告單」內逐項填列不符說明！</span>
+          </div>
+          <p class="text-xs leading-relaxed">
+            依據<strong>要點第5點(一)及(三)</strong>：現場裝置與已審妥之設計資料不符，但<strong>符合法規規定且不影響供電安全者</strong>，業者應將各點<strong>逐項填列於竣工報告單內</strong>（如表B正面下方之「現場裝置與設計資料不符說明」欄或表C第15項），由台電區營業處檢討並報主管核定後，即可依核定結果派員檢驗送電。
+          </p>
+        `;
+      } else if (val === 'case2') {
+        box.className = 'p-4 rounded-xl border-2 border-amber-500 bg-amber-50 text-amber-950';
+        box.innerHTML = `
+          <div class="font-bold text-sm flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+            <span>建議作法：應由原設計者先辦理「變更設計送審」，經台電審查同意後再繼續施工！</span>
+          </div>
+          <p class="text-xs leading-relaxed">
+            依據<strong>附件二第8點</strong>：「設計資料送經本公司審定後，原則上不得改變。惟<strong>如有必需變更設計時，應由原設計者將變更後之設計送本公司審查同意後，再行繼續施工</strong>。」以免報竣工時因影響系統保護協調或供電安全而遭退件改修。
+          </p>
+        `;
+      } else {
+        box.className = 'p-4 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-950';
+        box.innerHTML = `
+          <div class="font-bold text-sm flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-ban text-rose-600"></i>
+            <span>嚴重警告：用電用途不符者「台電依法不得送電」！請先辦理用途變更或現場改正</span>
+          </div>
+          <p class="text-xs leading-relaxed">
+            依據<strong>附件三第6點及附件七第3點</strong>：承裝業自檢與台電現場檢驗時，均須將現場裝設用電設備與「用戶申請用電登記單」所列用途別加以核對。<strong>用途不符者，不得送電。</strong>請務必於報竣工前協助業主向台電營業櫃檯確認或變更申請用途別。
+          </p>
+        `;
+      }
+    }
+
+    // 專案匯出與匯入
+    function exportContractorJSON() {
+      const str = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(contractorState, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute('href', str);
+      a.setAttribute('download', `業者報竣工勾稽表_${contractorState.meta.user || '專案'}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('已匯出專案勾稽備份檔 (.json)', 'success');
+    }
+
+    function importContractorJSON(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          contractorState = { ...contractorState, ...parsed };
+          initCardStates();
+          syncStateToUI();
+          renderContractorCards();
+          renderPrintDocument();
+          calculateContractorTimeline();
+          saveContractorStorage();
+          showToast('已成功匯入專案勾稽資料！', 'success');
+        } catch (err) {
+          showToast('檔案格式錯誤，無法匯入');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function syncStateToUI() {
+      document.getElementById('opt_ev').checked = !!contractorState.options.ev;
+      document.getElementById('opt_pe').checked = !!contractorState.options.pe;
+      document.getElementById('opt_deviceContract').checked = !!contractorState.options.deviceContract;
+      document.getElementById('opt_multiHouse').checked = !!contractorState.options.multiHouse;
+      document.getElementById('opt_cogen').checked = !!contractorState.options.cogen;
+
+      document.getElementById('pMeta_user').value = contractorState.meta.user || '';
+      document.getElementById('pMeta_no').value = contractorState.meta.no || '';
+      document.getElementById('pMeta_contractor').value = contractorState.meta.contractor || '';
+      document.getElementById('pMeta_engineer').value = contractorState.meta.engineer || '';
+      document.getElementById('toolTargetDate').value = contractorState.meta.targetDate || getOffsetDateStr(28);
+
+      // 同步字體大小與列印字級設定
+      setFontScale(contractorState.fontScale || 115, true);
+      if (contractorState.printFontSize) {
+        document.documentElement.style.setProperty('--print-font-size', contractorState.printFontSize);
+        const radios = document.querySelectorAll('input[name="printFontSize"]');
+        radios.forEach(r => {
+          r.checked = (r.value === contractorState.printFontSize);
+        });
+      }
+
+      updateVoltageLevelUI();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // 初始化啟動
+    window.onload = function() {
+      loadContractorStorage();
+      syncStateToUI();
+      switchTab('overview');
+      renderContractorCards();
+      calculateContractorTimeline();
+      evalDiffCase();
+      renderPrintDocument();
+    };
+  </script>
+</body>
+</html>
