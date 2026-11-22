@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>電器承裝業／電機技師專用｜台電新增設用電報竣工指南與自主勾稽系統</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,8 +32,14 @@
   </script>
   <style>
     :root {
-      --base-font-size: 18.5px;
-      --print-font-size: 12pt;
+      --base-font-size: 16.5px; /* 手機預設 103% 清晰且不擠壓版面 */
+      --print-font-size: 12.5pt;
+    }
+
+    @media (min-width: 768px) {
+      :root {
+        --base-font-size: 18.5px; /* 桌面預設 115% */
+      }
     }
 
     html {
@@ -44,34 +50,35 @@
       font-family: 'Noto Sans TC', 'Inter', sans-serif;
       background-color: #F8FAFC;
       color: #0F172A;
-      line-height: 1.7;
-      letter-spacing: 0.015em;
+      line-height: 1.68;
+      letter-spacing: 0.01em;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* 強制將原本偏小的固定像素或小字級轉為隨根元素等比例放大，消除閱讀吃力問題 */
     .text-\[11px\], .text-\[10px\], .text-\[9\.5pt\], .text-\[10pt\] {
-      font-size: 0.85rem !important;
-      line-height: 1.55 !important;
+      font-size: 0.84rem !important;
+      line-height: 1.52 !important;
     }
     .text-xs {
-      font-size: 0.92rem !important;
-      line-height: 1.65 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.62 !important;
     }
     .text-sm {
-      font-size: 1rem !important;
-      line-height: 1.7 !important;
+      font-size: 0.98rem !important;
+      line-height: 1.68 !important;
     }
     .text-base {
-      font-size: 1.12rem !important;
-      line-height: 1.7 !important;
+      font-size: 1.08rem !important;
+      line-height: 1.65 !important;
     }
     .text-lg {
-      font-size: 1.25rem !important;
-      line-height: 1.6 !important;
+      font-size: 1.2rem !important;
+      line-height: 1.55 !important;
     }
     .text-xl {
-      font-size: 1.4rem !important;
-      line-height: 1.5 !important;
+      font-size: 1.35rem !important;
+      line-height: 1.45 !important;
     }
 
     /* 提升淺灰字對比度，讓法規條文更清晰銳利 */
@@ -81,6 +88,10 @@
     .text-slate-500 {
       color: #334155 !important;
     }
+
+    /* 隱藏手機端橫向捲軸但保留滑動 */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
     /* 手風琴展開動畫輔助 */
     .detail-drawer {
@@ -125,34 +136,46 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- 頂部導覽標題列 (列印時隱藏) -->
+  <!-- 頂部導覽標題列 (手機端精簡吸頂設計，列印時隱藏) -->
   <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40 no-print">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-lg shadow">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+      <div class="flex items-center gap-2.5 min-w-0 flex-1">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-base sm:text-lg shadow shrink-0">
           <i class="fa-solid fa-helmet-safety"></i>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs px-2 py-0.5 rounded font-semibold">電器承裝業／電機技師專用視角</span>
-            <h1 class="text-base sm:text-lg font-bold tracking-wide">台電新增設用電設備「報竣工指南與自主勾稽系統」</h1>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5">
+            <span class="hidden sm:inline-block bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs px-2 py-0.5 rounded font-semibold shrink-0">電器承裝業／電機技師專用</span>
+            <h1 class="text-sm sm:text-lg font-bold tracking-wide truncate">台電新增設用電「報竣工指南與自主勾稽」</h1>
           </div>
-          <p class="text-xs text-slate-300 mt-0.5">依115年10月1日修正「新增設用戶用電設備檢驗要點」編製｜架構式總覽・細節點開再看・一鍵轉出勾稽表</p>
+          <p class="hidden md:block text-xs text-slate-300 mt-0.5">依115年10月1日修正「新增設用戶用電設備檢驗要點」編製｜架構式總覽・細節點開再看・一鍵轉出勾稽表</p>
+          <!-- 手機端精簡副標與勾稽進度 -->
+          <div class="flex sm:hidden items-center gap-2 mt-0.5">
+            <span class="text-[11px] text-sky-300 font-bold">115.10.1檢驗要點</span>
+            <span class="text-slate-600">|</span>
+            <span id="mobileProgressText" class="text-[11px] font-bold text-emerald-400">勾稽 0/0 (0%)</span>
+          </div>
         </div>
       </div>
 
       <!-- 右側：字體大小自由調整器 ＋ 業者勾稽進度與快捷列印 -->
-      <div class="flex flex-wrap items-center gap-3">
-        <!-- 護眼字體大小調整工具列 -->
-        <div class="bg-slate-800 px-3 py-1.5 rounded-xl border border-amber-400/50 flex flex-wrap items-center gap-2 shadow-inner">
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <!-- 手機端字體展開切換鈕 -->
+        <button type="button" onclick="toggleFontDrawer()" class="lg:hidden bg-slate-800 hover:bg-slate-700 border border-amber-400/50 text-amber-300 px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
+          <i class="fa-solid fa-text-height"></i>
+          <span>Aa</span>
+        </button>
+
+        <!-- 桌面端護眼字體大小調整工具列 -->
+        <div class="hidden lg:flex bg-slate-800 px-3 py-1.5 rounded-xl border border-amber-400/50 items-center gap-2 shadow-inner">
           <span class="text-xs font-bold text-amber-300 flex items-center gap-1">
             <i class="fa-solid fa-text-height"></i>
-            <span>字體大小：</span>
+            <span>字體：</span>
           </span>
           <button type="button" onclick="stepFontScale(-10)" class="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition" title="縮小文字">
             A-
           </button>
-          <div class="hidden sm:flex items-center gap-1">
+          <div class="flex items-center gap-1">
             <button type="button" onclick="setFontScale(100)" id="fontBtn_100" class="px-2 py-1 rounded text-xs font-bold transition">標準</button>
             <button type="button" onclick="setFontScale(115)" id="fontBtn_115" class="px-2 py-1 rounded text-xs font-bold transition">舒適大字</button>
             <button type="button" onclick="setFontScale(130)" id="fontBtn_130" class="px-2 py-1 rounded text-xs font-bold transition">超大護眼</button>
@@ -161,99 +184,117 @@
           <button type="button" onclick="stepFontScale(10)" class="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition" title="放大文字">
             A+
           </button>
-          <input type="range" id="fontScaleSlider" min="90" max="160" step="5" value="115" oninput="setFontScale(this.value)" class="w-20 accent-amber-400 cursor-pointer" title="拖曳調整文字大小">
+          <input type="range" id="fontScaleSlider" min="90" max="160" step="5" value="115" oninput="setFontScale(this.value)" class="w-16 accent-amber-400 cursor-pointer" title="拖曳調整文字大小">
           <span id="fontScaleLabel" class="text-xs font-mono font-bold text-amber-300 w-11 text-right">115%</span>
         </div>
 
-        <div class="bg-slate-800 px-3.5 py-1.5 rounded-lg border border-slate-700 flex items-center gap-3">
+        <!-- 桌面/平板勾稽進度 -->
+        <div class="hidden sm:flex bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 items-center gap-2.5">
           <div class="text-xs">
-            <span class="text-slate-300 block">本案業者應辦勾稽進度</span>
-            <span id="headerProgressText" class="font-bold text-emerald-400 text-sm">0 / 0 項 (0%)</span>
+            <span class="text-slate-300 block leading-tight">業者應辦勾稽進度</span>
+            <span id="headerProgressText" class="font-bold text-emerald-400 text-xs">0 / 0 項 (0%)</span>
           </div>
-          <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+          <div class="w-16 bg-slate-700 h-2 rounded-full overflow-hidden">
             <div id="headerProgressBar" class="bg-emerald-400 h-full transition-all duration-300" style="width: 0%"></div>
           </div>
         </div>
-        <button onclick="switchTab('print')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs sm:text-sm shadow transition flex items-center gap-1.5">
+
+        <button onclick="switchTab('print')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm shadow transition flex items-center gap-1.5">
           <i class="fa-solid fa-print"></i>
-          <span>預覽與列印勾稽表</span>
+          <span class="hidden sm:inline">預覽與列印勾稽表</span>
+          <span class="sm:hidden">列印</span>
         </button>
       </div>
     </div>
 
-    <!-- 主功能分頁切換列 -->
+    <!-- 手機/平板專用字體調整抽屜 -->
+    <div id="mobileFontDrawer" class="hidden lg:hidden bg-slate-800 border-t border-slate-700 px-3 py-2.5">
+      <div class="flex items-center justify-between gap-2 max-w-xl mx-auto">
+        <span class="text-xs font-bold text-amber-300 shrink-0"><i class="fa-solid fa-text-height mr-1"></i>字體大小</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="setFontScale(95)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">緊湊 95%</button>
+          <button type="button" onclick="setFontScale(103)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">標準 103%</button>
+          <button type="button" onclick="setFontScale(118)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">大字 118%</button>
+          <button type="button" onclick="setFontScale(132)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">特大 132%</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主功能分頁切換列（手機端精簡短標籤、單排左右滑動） -->
     <div class="bg-slate-800/90 border-t border-slate-700/80">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex overflow-x-auto py-1.5 gap-2">
-        <button onclick="switchTab('overview')" id="tabBtn_overview" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+      <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 flex overflow-x-auto no-scrollbar py-1.5 gap-1.5 sm:gap-2">
+        <button onclick="switchTab('overview')" id="tabBtn_overview" class="tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5">
           <i class="fa-solid fa-sitemap"></i>
-          <span>1. 架構總覽與報竣工通則</span>
+          <span>1. 架構總覽與通則</span>
         </button>
-        <button onclick="switchTab('guide')" id="tabBtn_guide" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+        <button onclick="switchTab('guide')" id="tabBtn_guide" class="tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5">
           <i class="fa-solid fa-layer-group"></i>
-          <span>2. 分級應備文件與自主檢查（低壓 / 高壓 / 特高壓）</span>
+          <span class="sm:hidden">2. 分級應備與自檢</span>
+          <span class="hidden sm:inline">2. 分級應備文件與自主檢查（低壓 / 高壓 / 特高壓）</span>
         </button>
-        <button onclick="switchTab('print')" id="tabBtn_print" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+        <button onclick="switchTab('print')" id="tabBtn_print" class="tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5">
           <i class="fa-solid fa-file-signature"></i>
-          <span>3. 勾稽表設定與列印中心</span>
+          <span class="sm:hidden">3. A4 列印中心</span>
+          <span class="hidden sm:inline">3. 勾稽表設定與列印中心</span>
         </button>
-        <button onclick="switchTab('tools')" id="tabBtn_tools" class="tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2">
+        <button onclick="switchTab('tools')" id="tabBtn_tools" class="tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5">
           <i class="fa-solid fa-calendar-day"></i>
-          <span>4. 特高壓時程倒推 & 現場不符自評工具</span>
+          <span class="sm:hidden">4. 時程與不符自評</span>
+          <span class="hidden sm:inline">4. 特高壓時程倒推 & 現場不符自評工具</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- 浮動通知容器 (不使用 alert) -->
-  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 no-print pointer-events-none"></div>
+  <!-- 浮動通知容器 -->
+  <div id="toastContainer" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-50 flex flex-col items-center sm:items-end gap-2 no-print pointer-events-none"></div>
 
   <!-- 網頁主內容區 (列印時隱藏) -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 no-print">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-5 sm:space-y-6 no-print">
 
     <!-- =========================================================================
          分頁 1：架構總覽與報竣工共通原則（通則）
-         設計理念：先看大架構圖（區分業者要做的事 vs 台電做的事），再看4張通則卡片，細節點開再看
          ========================================================================= -->
-    <section id="tabContent_overview" class="space-y-8">
+    <section id="tabContent_overview" class="space-y-6 sm:space-y-8">
 
       <!-- 頂部引導橫幅 -->
-      <div class="bg-gradient-to-r from-sky-900 via-sky-800 to-slate-900 rounded-2xl p-6 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="bg-gradient-to-r from-sky-900 via-sky-800 to-slate-900 rounded-2xl p-4 sm:p-6 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div class="space-y-1.5">
           <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs font-medium text-sky-200">
             <i class="fa-solid fa-lightbulb text-amber-300"></i>
-            <span>為什麼這樣設計？先看全貌架構，需要時再點開看細項條文！</span>
+            <span>先看全貌架構，需要時再點開看細項條文！</span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-bold">業者辦理「新增設用戶用電設備」報竣工全貌指南</h2>
+          <h2 class="text-lg sm:text-2xl font-bold">業者辦理「新增設用戶用電設備」報竣工全貌指南</h2>
           <p class="text-xs sm:text-sm text-sky-100/90 max-w-3xl leading-relaxed">
-            本指南專為<strong>電器承裝業</strong>與<strong>電機技師</strong>打造。我們將台電內部行政作業與業者的檢核表徹底分離：您只需要掌握「<strong>共通報竣工通則</strong>」與「<strong>各電壓等級應備文件及現場自檢</strong>」，即可快速完成送件準備並輸出自主勾稽表。
+            本指南專為<strong>電器承裝業</strong>與<strong>電機技師</strong>打造，將台電內部行政作業與業者的檢核表徹底分離：您只需要掌握「<strong>共通報竣工通則</strong>」與「<strong>各電壓等級應備文件及現場自檢</strong>」，即可快速完成送件並輸出自主勾稽表。
           </p>
         </div>
-        <button onclick="switchTab('guide')" class="shrink-0 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
+        <button onclick="switchTab('guide')" class="w-full sm:w-auto shrink-0 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm shadow-lg transition flex items-center justify-center gap-2">
           <span>前往各類用戶應備清單</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
 
-      <!-- 第一部分：架構式全流程圖（清楚區分【業者必辦】與【台電端作業參考】） -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+      <!-- 第一部分：架構式全流程圖 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 sm:mb-5">
           <div>
-            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <h3 class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
               <i class="fa-solid fa-diagram-next text-sky-700"></i>
-              <span>一、從設計到送電：四大階段架構圖（點擊卡片可展開細節）</span>
+              <span>一、從設計到送電：四大階段架構圖</span>
             </h3>
-            <p class="text-xs text-slate-500 mt-0.5">蓝色卡片為<strong>【業者端應辦事項】</strong>；灰色卡片為<strong>【台電端作業流程（僅供參考，不列入業者勾稽表）】</strong></p>
+            <p class="text-xs text-slate-500 mt-0.5">藍色卡片為<strong>【業者端應辦事項】</strong>；灰色卡片為<strong>【台電端作業流程參考】</strong></p>
           </div>
           <div class="flex items-center gap-3 text-xs">
             <span class="flex items-center gap-1.5 font-semibold text-sky-800"><span class="w-3 h-3 rounded-full bg-sky-600 inline-block"></span>業者核心職責</span>
-            <span class="flex items-center gap-1.5 font-semibold text-slate-500"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>台電端作業(僅供流程參考)</span>
+            <span class="flex items-center gap-1.5 font-semibold text-slate-500"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>台電端作業參考</span>
           </div>
         </div>
 
         <!-- 四大階段架構卡片 -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
           <!-- 階段 1 (業者) -->
-          <div onclick="toggleFlowDetail('flow_1')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+          <div onclick="toggleFlowDetail('flow_1')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md active:scale-[0.99] transition flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 1｜業者端</span>
@@ -271,7 +312,7 @@
           </div>
 
           <!-- 階段 2 (業者) -->
-          <div onclick="toggleFlowDetail('flow_2')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+          <div onclick="toggleFlowDetail('flow_2')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md active:scale-[0.99] transition flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 2｜業者端核心</span>
@@ -289,7 +330,7 @@
           </div>
 
           <!-- 階段 3 (業者) -->
-          <div onclick="toggleFlowDetail('flow_3')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md transition flex flex-col justify-between">
+          <div onclick="toggleFlowDetail('flow_3')" class="cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-50/50 p-4 hover:shadow-md active:scale-[0.99] transition flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 3｜業者端核心</span>
@@ -307,7 +348,7 @@
           </div>
 
           <!-- 階段 4 (台電端流程參考) -->
-          <div onclick="toggleFlowDetail('flow_4')" class="cursor-pointer rounded-xl border-2 border-slate-300 bg-slate-100/80 p-4 hover:shadow-md transition flex flex-col justify-between">
+          <div onclick="toggleFlowDetail('flow_4')" class="cursor-pointer rounded-xl border-2 border-slate-300 bg-slate-100/80 p-4 hover:shadow-md active:scale-[0.99] transition flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="bg-slate-600 text-white text-xs font-bold px-2.5 py-0.5 rounded">階段 4｜台電端作業流程</span>
@@ -320,30 +361,30 @@
               </p>
             </div>
             <div class="mt-3 pt-2 border-t border-slate-300 text-[11px] font-medium text-slate-500">
-              * 本階段屬台電權責，不列入業者勾稽表
+              • 本階段屬台電權責，不列入業者勾稽表
             </div>
           </div>
         </div>
 
         <!-- 階段點擊展開之詳細說明抽屜 -->
-        <div id="flowDetailDrawer" class="mt-4 hidden rounded-xl bg-slate-50 border border-slate-200 p-5 text-xs sm:text-sm"></div>
+        <div id="flowDetailDrawer" class="mt-4 hidden rounded-xl bg-slate-50 border border-slate-200 p-4 sm:p-5 text-xs sm:text-sm"></div>
       </div>
 
       <!-- 第二部分：所有用戶皆適用的「報竣工 4 大共通原則（通則）」架構卡片 -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-        <div class="mb-5">
-          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <div class="mb-4 sm:mb-5">
+          <h3 class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
             <i class="fa-solid fa-book-bookmark text-emerald-600"></i>
             <span>二、業者報竣工「4 大共通原則（通則）」總整理</span>
           </h3>
-          <p class="text-xs text-slate-500 mt-0.5">無論辦理低壓、高壓或特高壓案件，以下 4 項通則皆為共通規定（點擊各卡片下方按鈕可展開完整條文細節）</p>
+          <p class="text-xs text-slate-500 mt-0.5">無論辦理低壓、高壓或特高壓案件，以下 4 項通則皆為共通規定（點擊下方按鈕展開完整細節）</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- 通則 1：單線系統圖簽章與標註 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          <!-- 通則 1 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 1｜圖面與印章規定</span>
                 <span class="text-xs text-slate-400">法源：附件二第9點、表A/B備註</span>
               </div>
@@ -354,9 +395,9 @@
               </ul>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
-              <button onclick="toggleRuleAccordion('rule_1')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span>點此展開：高低壓單線圖完整必註明清單與左下角預留空間規定</span>
+              <button onclick="toggleRuleAccordion('rule_1')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5 text-left">
+                <i class="fa-solid fa-circle-plus shrink-0"></i>
+                <span>展開：高低壓單線圖完整必註明清單與左下角預留空間規定</span>
               </button>
               <div id="rule_1" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
                 <p><strong>1. 低壓及一般回路必註明：</strong>供電方式、配線種類、線徑、管徑、管別、保護開關、負載容量、於接戶開關(總開關)測得之全系統絕緣電阻、各接地點之接地電阻。</p>
@@ -366,10 +407,10 @@
             </div>
           </div>
 
-          <!-- 通則 2：竣工試驗報告出具單位資格 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+          <!-- 通則 2 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 2｜試驗報告資格</span>
                 <span class="text-xs text-slate-400">法源：要點第5點(二)、檢驗辦法第15條</span>
               </div>
@@ -382,9 +423,9 @@
               </ol>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
-              <button onclick="toggleRuleAccordion('rule_2')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span>點此展開：高壓用電設備出廠與現場試驗報告查對要點</span>
+              <button onclick="toggleRuleAccordion('rule_2')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5 text-left">
+                <i class="fa-solid fa-circle-plus shrink-0"></i>
+                <span>展開：高壓用電設備出廠與現場試驗報告查對要點</span>
               </button>
               <div id="rule_2" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
                 <p>• 除上述竣工試驗報告外，高壓以上設備另須查對是否符合「<strong>經濟部認可檢驗機構與原製造廠家及高壓用電設備施行試驗作業要點</strong>」規定之出廠/型式試驗報告（附件三第3點）。</p>
@@ -393,10 +434,10 @@
             </div>
           </div>
 
-          <!-- 通則 3：現場與已審妥設計資料不符之處理 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+          <!-- 通則 3 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 3｜現場與設計差異處理</span>
                 <span class="text-xs text-slate-400">法源：要點第5點(一)(三)、附件二第8點</span>
               </div>
@@ -407,9 +448,9 @@
               </ul>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
-              <button onclick="toggleRuleAccordion('rule_3')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span>點此展開：如何填寫不符說明欄 & 設計資料更正要點(附件二之二)核對</span>
+              <button onclick="toggleRuleAccordion('rule_3')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5 text-left">
+                <i class="fa-solid fa-circle-plus shrink-0"></i>
+                <span>展開：如何填寫不符說明欄 & 設計資料更正要點(附件二之二)核對</span>
               </button>
               <div id="rule_3" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
                 <p><strong>1. 圖審「更正要點」核對：</strong>若審圖時台電附有「設計資料更正要點（附件二之二）」，業者於報竣工時應確認已依更正要點自行檢討修正完妥，檢驗送電時台電人員將逐項查對。</p>
@@ -418,10 +459,10 @@
             </div>
           </div>
 
-          <!-- 通則 4：特殊條件加附文件（充電樁VPC、電機技師、裝置契約） -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm flex flex-col justify-between">
+          <!-- 通則 4 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded">通則 4｜特殊工程加附文件</span>
                 <span class="text-xs text-slate-400">法源：要點第5點(一)、附件四第4~6點</span>
               </div>
@@ -433,9 +474,9 @@
               </ul>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
-              <button onclick="toggleRuleAccordion('rule_4')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span>點此展開：更換電機技師「拋棄聲明書」用印規定 & 影本簽章規定</span>
+              <button onclick="toggleRuleAccordion('rule_4')" class="text-xs font-bold text-sky-700 hover:text-sky-900 flex items-center gap-1.5 text-left">
+                <i class="fa-solid fa-circle-plus shrink-0"></i>
+                <span>展開：更換電機技師「拋棄聲明書」用印規定 & 影本簽章規定</span>
               </button>
               <div id="rule_4" class="hidden mt-3 p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
                 <p><strong>1. 更換電機技師拋棄聲明書（附件四第5點(三)）：</strong>中途更換電機技師時應檢附拋棄聲明書，聲明書上除「<strong>業主、拋棄業務之技師及承接業務之技師</strong>」三方用印外，亦<strong>需經中華民國電機技師公會核章</strong>。</p>
@@ -450,37 +491,36 @@
 
     <!-- =========================================================================
          分頁 2：分級應備文件與自主檢查（低壓 / 高壓 / 特高壓）
-         設計理念：頂部選擇電壓等級與附加條件，下方以「清爽架構卡片」呈現，點開才看細項，並可直接打勾連動列印！
          ========================================================================= -->
-    <section id="tabContent_guide" class="space-y-6 hidden">
+    <section id="tabContent_guide" class="space-y-4 sm:space-y-6 hidden">
 
       <!-- 步驟 1：選擇用戶類型與工程附加條件 -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-5">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 space-y-4 sm:space-y-5">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div>
             <h2 class="font-bold text-slate-800 text-base sm:text-lg flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sky-700 text-white text-xs flex items-center justify-center font-bold">1</span>
+              <span class="w-6 h-6 rounded-full bg-sky-700 text-white text-xs flex items-center justify-center font-bold shrink-0">1</span>
               <span>選擇本案「用戶電壓等級」與「特殊附加條件」</span>
             </h2>
             <p class="text-xs text-slate-500 mt-0.5">切換後，下方將只顯示該等級業者必須準備的「應檢附文件」與「自主檢查架構卡片」</p>
           </div>
-          <div class="flex items-center gap-2">
-            <button onclick="expandAllCards(true)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-medium transition">
-              <i class="fa-solid fa-angles-down mr-1"></i>展開全部細項
+          <div class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+            <button onclick="expandAllCards(true)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-bold transition text-center">
+              <i class="fa-solid fa-angles-down mr-1"></i>展開全部
             </button>
-            <button onclick="expandAllCards(false)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-medium transition">
-              <i class="fa-solid fa-angles-up mr-1"></i>收合全部細項
+            <button onclick="expandAllCards(false)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-bold transition text-center">
+              <i class="fa-solid fa-angles-up mr-1"></i>收合全部
             </button>
           </div>
         </div>
 
         <!-- 三大用戶類型大型切換器 -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <!-- 低壓用戶 -->
-          <button type="button" onclick="selectVoltageLevel('lv')" id="vCard_lv" class="text-left p-4 rounded-xl border-2 transition">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-base text-slate-900">A. 低壓供電用戶</span>
-              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">適用附件四表A</span>
+          <button type="button" onclick="selectVoltageLevel('lv')" id="vCard_lv" class="text-left p-3.5 sm:p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between gap-1 mb-1.5">
+              <span class="font-bold text-sm sm:text-base text-slate-900">A. 低壓供電用戶</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">適用附件四表A</span>
             </div>
             <p class="text-xs text-slate-500 leading-relaxed">
               含一般低壓單獨設戶（可簡易圖面報竣工）、同格局多戶（加附續頁騎縫章）及契約≥100kW/6樓以上等需先審圖之低壓用戶。
@@ -488,10 +528,10 @@
           </button>
 
           <!-- 高壓用戶 -->
-          <button type="button" onclick="selectVoltageLevel('hv')" id="vCard_hv" class="text-left p-4 rounded-xl border-2 transition">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-base text-slate-900">B. 高壓供電用戶</span>
-              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">適用附件四表B</span>
+          <button type="button" onclick="selectVoltageLevel('hv')" id="vCard_hv" class="text-left p-3.5 sm:p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between gap-1 mb-1.5">
+              <span class="font-bold text-sm sm:text-base text-slate-900">B. 高壓供電用戶</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 shrink-0">適用附件四表B</span>
             </div>
             <p class="text-xs text-slate-500 leading-relaxed">
               須事先送審設計(1式3份)。報竣工檢附表B、高壓設備出廠與竣工試驗報告(1~9項張數清點)及斷路器保護電驛三項試驗報告。
@@ -499,10 +539,10 @@
           </button>
 
           <!-- 特高壓用戶 -->
-          <button type="button" onclick="selectVoltageLevel('ehv')" id="vCard_ehv" class="text-left p-4 rounded-xl border-2 transition">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-base text-slate-900">C. 特高壓用戶 (自備變電所/汽電共生)</span>
-              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">表B + 表C + 附件六</span>
+          <button type="button" onclick="selectVoltageLevel('ehv')" id="vCard_ehv" class="text-left p-3.5 sm:p-4 rounded-xl border-2 transition">
+            <div class="flex items-center justify-between gap-1 mb-1.5">
+              <span class="font-bold text-sm sm:text-base text-slate-900">C. 特高壓用戶 (自備變電所)</span>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 shrink-0">表B + 表C + 附件六</span>
             </div>
             <p class="text-xs text-slate-500 leading-relaxed">
               預定加入系統 <strong>20天前</strong> 完成報竣工。除表B外，必附「自備變電所檢查表C(15大項)」及「附件六加入系統調度操作準則」各項文件。
@@ -511,43 +551,51 @@
         </div>
 
         <!-- 特殊工程附加條件勾選列 -->
-        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center gap-4 text-xs">
-          <span class="font-bold text-slate-700"><i class="fa-solid fa-plus-circle text-sky-700 mr-1"></i>本案特殊條件（勾選後自動加入必備清單）：</span>
-          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
-            <input type="checkbox" id="opt_ev" onchange="updateOptions()" class="rounded text-sky-700">
-            <span>含電動車充電設備 (需附標檢局 VPC 證書)</span>
-          </label>
-          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
-            <input type="checkbox" id="opt_pe" onchange="updateOptions()" class="rounded text-sky-700">
-            <span>屬電機技師設計監造範圍 (附技師公會竣工證明/執照)</span>
-          </label>
-          <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
-            <input type="checkbox" id="opt_deviceContract" onchange="updateOptions()" class="rounded text-sky-700">
-            <span>屬裝置契約用戶 (需附附件四表D 入力容量紀錄卡)</span>
-          </label>
-          <label id="opt_multiHouse_wrap" class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
-            <input type="checkbox" id="opt_multiHouse" onchange="updateOptions()" class="rounded text-sky-700">
-            <span>低壓同格局多戶集合住宅 (加附表A續頁並蓋騎縫章)</span>
-          </label>
-          <label id="opt_cogen_wrap" class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-800">
-            <input type="checkbox" id="opt_cogen" onchange="updateOptions()" class="rounded text-sky-700">
-            <span>含汽電共生發電機組 (需附附表四~十二模型及RTU測試)</span>
-          </label>
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
+          <div class="font-bold text-slate-700"><i class="fa-solid fa-plus-circle text-sky-700 mr-1"></i>本案特殊條件（勾選後自動加入必備清單）：</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            <label class="flex items-start gap-2 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer font-medium text-slate-800">
+              <input type="checkbox" id="opt_ev" onchange="updateOptions()" class="mt-0.5 w-4 h-4 rounded text-sky-700 shrink-0">
+              <span>含電動車充電設備 (需附標檢局 VPC 證書)</span>
+            </label>
+            <label class="flex items-start gap-2 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer font-medium text-slate-800">
+              <input type="checkbox" id="opt_pe" onchange="updateOptions()" class="mt-0.5 w-4 h-4 rounded text-sky-700 shrink-0">
+              <span>屬電機技師設計監造範圍 (附技師公會證明/執照)</span>
+            </label>
+            <label class="flex items-start gap-2 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer font-medium text-slate-800">
+              <input type="checkbox" id="opt_deviceContract" onchange="updateOptions()" class="mt-0.5 w-4 h-4 rounded text-sky-700 shrink-0">
+              <span>屬裝置契約用戶 (需附附件四表D 入力容量紀錄卡)</span>
+            </label>
+            <label id="opt_multiHouse_wrap" class="flex items-start gap-2 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer font-medium text-slate-800">
+              <input type="checkbox" id="opt_multiHouse" onchange="updateOptions()" class="mt-0.5 w-4 h-4 rounded text-sky-700 shrink-0">
+              <span>低壓同格局多戶集合住宅 (加附表A續頁並蓋騎縫章)</span>
+            </label>
+            <label id="opt_cogen_wrap" class="flex items-start gap-2 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer font-medium text-slate-800">
+              <input type="checkbox" id="opt_cogen" onchange="updateOptions()" class="mt-0.5 w-4 h-4 rounded text-sky-700 shrink-0">
+              <span>含汽電共生發電機組 (附附表四~十二模型及RTU測試)</span>
+            </label>
+          </div>
         </div>
       </div>
 
-      <!-- 步驟 2：動態渲染之「業者應備文件與自主檢查」架構式卡片清單 -->
-      <div class="flex flex-wrap items-center justify-between gap-2 px-1">
-        <div class="text-xs text-slate-600">
-          <i class="fa-solid fa-circle-info text-sky-600 mr-1"></i>
-          提示：每張卡片預設僅顯示<strong>架構重點</strong>，點擊卡片下方「<strong>展開查看細項與檢查表</strong>」即可檢視完整法規條文；右側可直接打勾或填入實測備註，將自動同步至列印勾稽表！
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="batchMarkStatus('ok')" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-semibold px-3 py-1.5 rounded-lg transition">
-            <i class="fa-solid fa-check-double mr-1"></i>本頁全部標為已備齊/合格
+      <!-- 步驟 2：現場關鍵字快篩與批次操作列 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- 即時關鍵字過濾框 -->
+        <div class="relative flex-1 max-w-md">
+          <input type="text" id="guideSearchInput" oninput="handleGuideFilter(this.value)" placeholder="現場快搜法規（如：VPC、騎縫章、表C、20日、拋棄聲明）..."
+            class="w-full pl-9 pr-8 py-2 text-xs sm:text-sm border border-slate-300 focus:border-sky-600 focus:ring-2 focus:ring-sky-600/20 rounded-xl outline-none">
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-2.5 sm:top-3"></i>
+          <button type="button" id="clearGuideSearchBtn" onclick="clearGuideFilter()" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 px-1">
+            <i class="fa-solid fa-circle-xmark"></i>
           </button>
-          <button onclick="batchMarkStatus('pending')" class="text-xs bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 font-medium px-3 py-1.5 rounded-lg transition">
-            重置狀態
+        </div>
+
+        <div class="grid grid-cols-2 sm:flex items-center gap-2 shrink-0">
+          <button onclick="batchMarkStatus('ok')" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-bold px-3 py-2 rounded-xl transition text-center">
+            <i class="fa-solid fa-check-double mr-1"></i>全部標為合格
+          </button>
+          <button onclick="batchMarkStatus('pending')" class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-300 font-bold px-3 py-2 rounded-xl transition text-center">
+            重置檢核狀態
           </button>
         </div>
       </div>
@@ -559,98 +607,96 @@
 
     <!-- =========================================================================
          分頁 3：勾稽表設定與列印中心（業者專用版）
-         設計理念：可先設定案件表頭、勾選要列印哪些章節、選擇是否展開細項子表、選擇空白或已檢核模式
          ========================================================================= -->
-    <section id="tabContent_print" class="space-y-6 hidden">
+    <section id="tabContent_print" class="space-y-5 sm:space-y-6 hidden">
 
       <!-- 列印設定控制面板 -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4 sm:space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3.5 sm:pb-4">
           <div>
-            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <h2 class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
               <i class="fa-solid fa-print text-sky-700"></i>
               <span>業者專用「報竣工自主勾稽表」列印設定中心</span>
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5">您可以先設定案件基本資料、勾選要納入列印的內容模組與細項程度，再預覽並印出 A4 紙本或另存 PDF</p>
+            <p class="text-xs text-slate-500 mt-0.5">先設定案件基本資料、勾選要納入列印的內容模組與細項程度，再預覽並印出 A4 紙本或另存 PDF</p>
           </div>
-          <button onclick="window.print()" class="bg-sky-700 hover:bg-sky-800 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 text-sm">
+          <button onclick="window.print()" class="w-full sm:w-auto bg-sky-700 hover:bg-sky-800 text-white font-bold px-5 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
             <i class="fa-solid fa-print"></i>
             <span>立即列印 / 匯出 A4 PDF</span>
           </button>
         </div>
 
-        <!-- 1. 案件表頭基本資料設定 (可選填，印在勾稽表最上方) -->
+        <!-- 1. 案件表頭基本資料設定 -->
         <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-2">1. 設定勾稽表表頭工程資訊（選填，將顯示於列印表單頂部）</label>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div>
               <span class="text-slate-500 block mb-1">用戶名稱 / 工程名稱</span>
-              <input type="text" id="pMeta_user" oninput="saveMetaAndRefreshPrint()" placeholder="例：台灣精密科技廠房新建工程" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+              <input type="text" id="pMeta_user" oninput="saveMetaAndRefreshPrint()" placeholder="例：台灣精密科技廠房新建工程" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
             </div>
             <div>
               <span class="text-slate-500 block mb-1">受理號碼 / 電號 / 區營業處</span>
-              <input type="text" id="pMeta_no" oninput="saveMetaAndRefreshPrint()" placeholder="例：台北北區處 / 115-08912" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+              <input type="text" id="pMeta_no" oninput="saveMetaAndRefreshPrint()" placeholder="例：台北北區處 / 115-08912" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
             </div>
             <div>
               <span class="text-slate-500 block mb-1">負責施工電器承裝業</span>
-              <input type="text" id="pMeta_contractor" oninput="saveMetaAndRefreshPrint()" placeholder="例：永安機電工程有限公司" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+              <input type="text" id="pMeta_contractor" oninput="saveMetaAndRefreshPrint()" placeholder="例：永安機電工程有限公司" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
             </div>
             <div>
               <span class="text-slate-500 block mb-1">設計/監造電機技師 & 預定送電日</span>
-              <input type="text" id="pMeta_engineer" oninput="saveMetaAndRefreshPrint()" placeholder="例：林大華 技師 / 115-12-01" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg">
+              <input type="text" id="pMeta_engineer" oninput="saveMetaAndRefreshPrint()" placeholder="例：林大華 技師 / 115-12-01" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
             </div>
           </div>
         </div>
 
         <!-- 2. 列印模式與細項展開設定 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-3 border-t border-slate-100">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 pt-3 border-t border-slate-100">
           <!-- 左：列印篩選與展開程度 -->
           <div class="space-y-3">
             <label class="block text-xs font-bold text-slate-700 uppercase">2. 選擇列印格式、細項程度與「列印字體大小」</label>
-            <!-- 新增：A4 列印專用字體大小選擇器 -->
             <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-between gap-2 text-xs">
               <span class="font-bold text-amber-950 flex items-center gap-1.5">
                 <i class="fa-solid fa-magnifying-glass-plus text-amber-700"></i>
-                <span>A4 紙本／PDF 列印字體大小：</span>
+                <span>A4 紙本／PDF 列印字體：</span>
               </span>
-              <div class="flex items-center gap-2">
-                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+              <div class="grid grid-cols-3 sm:flex items-center gap-1.5 w-full sm:w-auto">
+                <label class="inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1.5 rounded border border-amber-300">
                   <input type="radio" name="printFontSize" value="11pt" onchange="updatePrintFontSize(this.value)" class="text-sky-700">
-                  <span>標準 (11pt)</span>
+                  <span>11pt</span>
                 </label>
-                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+                <label class="inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1.5 rounded border border-amber-300">
                   <input type="radio" name="printFontSize" value="12.5pt" checked onchange="updatePrintFontSize(this.value)" class="text-sky-700">
-                  <span>舒適大字 (12.5pt)</span>
+                  <span>12.5pt</span>
                 </label>
-                <label class="inline-flex items-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-amber-300">
+                <label class="inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-slate-800 bg-white px-2.5 py-1.5 rounded border border-amber-300">
                   <input type="radio" name="printFontSize" value="14pt" onchange="updatePrintFontSize(this.value)" class="text-sky-700">
-                  <span>特大清晰 (14pt)</span>
+                  <span>14pt</span>
                 </label>
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+              <label class="flex items-start gap-2.5 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
                 <input type="radio" name="printMode" value="all" checked onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
                 <div>
                   <span class="font-bold text-slate-800 block">列印全部勾選項目（含目前狀態）</span>
                   <span class="text-slate-500">完整呈現已打勾(✓)、待辦與填寫之備註</span>
                 </div>
               </label>
-              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+              <label class="flex items-start gap-2.5 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
                 <input type="radio" name="printMode" value="blank" onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
                 <div>
                   <span class="font-bold text-slate-800 block">空白現場查核表（供工地手寫打勾）</span>
                   <span class="text-slate-500">狀態欄全部印為 `☐ 已備齊/合格`，方便手寫</span>
                 </div>
               </label>
-              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+              <label class="flex items-start gap-2.5 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
                 <input type="radio" name="printMode" value="incomplete" onchange="renderPrintDocument()" class="mt-0.5 text-sky-700">
                 <div>
                   <span class="font-bold text-rose-700 block">僅列印「尚未完成 / 待補件」項目</span>
                   <span class="text-slate-500">作為送件前最後缺件催辦清單</span>
                 </div>
               </label>
-              <label class="flex items-start gap-2 p-2.5 rounded-lg border border-sky-200 bg-sky-50/60 cursor-pointer">
+              <label class="flex items-start gap-2.5 p-2.5 rounded-lg border border-sky-200 bg-sky-50/60 cursor-pointer">
                 <input type="checkbox" id="printIncludeSubItems" checked onchange="renderPrintDocument()" class="mt-0.5 rounded text-sky-700">
                 <div>
                   <span class="font-bold text-sky-900 block">同時印出「展開之檢查細項清單」</span>
@@ -664,67 +710,69 @@
           <div class="space-y-3">
             <label class="block text-xs font-bold text-slate-700 uppercase">3. 先設定哪些內容章節要列印（可自由勾選組合）</label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_header" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_header" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
                 <span class="font-medium text-slate-800">工程基本資料表頭</span>
               </label>
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_common" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
-                <span class="font-medium text-slate-800">【通則】單線圖三方簽章與必註事項檢核</span>
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_common" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
+                <span class="font-medium text-slate-800">【通則】單線圖三方簽章與必註事項</span>
               </label>
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_docs" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_docs" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
                 <span class="font-medium text-slate-800">【書面】報竣工應檢附書面與證明文件</span>
               </label>
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_self" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_self" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
                 <span class="font-medium text-slate-800">【自檢】現場自主檢查與測試項目</span>
               </label>
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_dispatch" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
-                <span class="font-medium text-slate-800">【特高壓】加入系統調度操作準則文件(附件六)</span>
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_dispatch" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
+                <span class="font-medium text-slate-800">【特高壓】加入系統調度操作準則(附件六)</span>
               </label>
-              <label class="flex items-center gap-2 p-2 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <input type="checkbox" id="pSec_sign" checked onchange="renderPrintDocument()" class="rounded text-sky-700">
-                <span class="font-medium text-slate-800">業者自主檢核三方簽章欄 (用戶/承裝業/技師)</span>
+              <label class="flex items-center gap-2 p-2.5 rounded border border-slate-200 cursor-pointer hover:bg-slate-50">
+                <input type="checkbox" id="pSec_sign" checked onchange="renderPrintDocument()" class="w-4 h-4 rounded text-sky-700 shrink-0">
+                <span class="font-medium text-slate-800">業者自主檢核三方簽章欄</span>
               </label>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- A4 即時預覽區 -->
-      <div class="flex items-center justify-between text-xs text-slate-500 px-1">
-        <span><i class="fa-solid fa-file-lines mr-1"></i>下方為 A4 勾稽表即時預覽（單一項目若不想列印，可在分頁 2 取消該卡片的「🖨️ 納入列印」勾選）</span>
-        <span>目前設定適用等級：<strong id="printLevelLabel" class="text-slate-800">高壓供電用戶</strong></span>
+      <!-- A4 即時預覽區（手機端支援橫向滑動檢視完整表格） -->
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 px-1">
+        <span><i class="fa-solid fa-file-lines mr-1"></i>下方為 A4 勾稽表即時預覽（手機端可左右滑動表格）</span>
+        <span>目前適用等級：<strong id="printLevelLabel" class="text-slate-800">高壓供電用戶</strong></span>
       </div>
 
-      <div id="printPreviewBox" class="bg-white rounded-xl shadow-lg border border-slate-300 p-6 sm:p-10 max-w-4xl mx-auto"></div>
+      <div class="overflow-x-auto rounded-xl shadow-lg border border-slate-300 bg-white max-w-4xl mx-auto">
+        <div id="printPreviewBox" class="min-w-[660px] sm:min-w-0 bg-white p-5 sm:p-10"></div>
+      </div>
 
     </section>
 
     <!-- =========================================================================
          分頁 4：業者實用工具箱（特高壓送件時程倒推計算機 & 現場與設計不符自評工具）
          ========================================================================= -->
-    <section id="tabContent_tools" class="space-y-6 hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <section id="tabContent_tools" class="space-y-5 sm:space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
 
         <!-- 工具 1：特高壓自備變電所/汽電共生「業者送件時程倒推計算機」 -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center gap-2.5 mb-3">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg shrink-0">
                 <i class="fa-solid fa-stopwatch"></i>
               </div>
               <div>
-                <h3 class="font-bold text-slate-800 text-base">工具 1：特高壓用戶「業者報竣工與調度送件」時程倒推計算機</h3>
+                <h3 class="font-bold text-slate-800 text-base">工具 1：特高壓「報竣工與調度送件」時程倒推</h3>
                 <p class="text-xs text-slate-500">依據要點第5點(四)及附件六「自備變電所調度操作準則」推算業者最遲送件日</p>
               </div>
             </div>
 
-            <div class="bg-purple-50/70 p-3.5 rounded-xl border border-purple-200 mb-4 flex flex-wrap items-center justify-between gap-2">
+            <div class="bg-purple-50/70 p-3.5 rounded-xl border border-purple-200 mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <label class="text-xs font-bold text-purple-950">請輸入業主「預定加入台電系統送電日」：</label>
-              <input type="date" id="toolTargetDate" onchange="calculateContractorTimeline()" class="px-3 py-1.5 text-sm font-bold text-purple-900 bg-white border border-purple-300 rounded-lg outline-none">
+              <input type="date" id="toolTargetDate" onchange="calculateContractorTimeline()" class="w-full sm:w-auto px-3 py-2 text-sm font-bold text-purple-900 bg-white border border-purple-300 rounded-lg outline-none">
             </div>
 
             <div id="contractorTimelineOutput" class="space-y-2.5 text-xs"></div>
@@ -736,14 +784,14 @@
         </div>
 
         <!-- 工具 2：現場裝置與已審妥設計不符「業者處理方式自評工具」 -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center gap-2.5 mb-3">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg shrink-0">
                 <i class="fa-solid fa-code-branch"></i>
               </div>
               <div>
-                <h3 class="font-bold text-slate-800 text-base">工具 2：現場施工與原審訖設計不符「業者應對自評器」</h3>
+                <h3 class="font-bold text-slate-800 text-base">工具 2：現場施工與原審訖設計不符自評器</h3>
                 <p class="text-xs text-slate-500">幫助承裝業與監造技師快速判斷：該直接報竣工填說明欄，還是先辦變更設計？</p>
               </div>
             </div>
@@ -751,17 +799,17 @@
             <div class="space-y-3 text-xs">
               <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                 <p class="font-bold text-slate-800 mb-2">請選擇目前現場與原審定設計圖差異之情形：</p>
-                <div class="space-y-2">
-                  <label class="flex items-start gap-2 cursor-pointer">
-                    <input type="radio" name="diffCase" value="case1" checked onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                <div class="space-y-2.5">
+                  <label class="flex items-start gap-2.5 cursor-pointer p-2 rounded-lg bg-white border border-slate-200">
+                    <input type="radio" name="diffCase" value="case1" checked onchange="evalDiffCase()" class="mt-0.5 w-4 h-4 text-sky-700 shrink-0">
                     <span><strong>情形 A：</strong>現場局部裝置調整與已審妥設計不符，但<strong>符合「用戶用電設備裝置規則」規定，且不影響供電安全</strong>（例如分路配置微調、同等級器材替換等）。</span>
                   </label>
-                  <label class="flex items-start gap-2 cursor-pointer">
-                    <input type="radio" name="diffCase" value="case2" onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                  <label class="flex items-start gap-2.5 cursor-pointer p-2 rounded-lg bg-white border border-slate-200">
+                    <input type="radio" name="diffCase" value="case2" onchange="evalDiffCase()" class="mt-0.5 w-4 h-4 text-sky-700 shrink-0">
                     <span><strong>情形 B：</strong>涉及重大設計變更（如變更受電電壓、主變壓器容量、責任分界點、主保護電驛協調架構或增設諧波/閃爍源）。</span>
                   </label>
-                  <label class="flex items-start gap-2 cursor-pointer">
-                    <input type="radio" name="diffCase" value="case3" onchange="evalDiffCase()" class="mt-0.5 text-sky-700">
+                  <label class="flex items-start gap-2.5 cursor-pointer p-2 rounded-lg bg-white border border-slate-200">
+                    <input type="radio" name="diffCase" value="case3" onchange="evalDiffCase()" class="mt-0.5 w-4 h-4 text-sky-700 shrink-0">
                     <span><strong>情形 C：</strong>現場實際裝設之用電設備，與當初向台電申請用電登記單所列之<strong>「用電用途別」不符</strong>。</span>
                   </label>
                 </div>
@@ -771,11 +819,11 @@
             </div>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-500">需要保存本案勾稽進度以便下次繼續編輯嗎？</span>
-            <div class="flex gap-2">
-              <button onclick="exportContractorJSON()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-lg font-medium">匯出備份 (.json)</button>
-              <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg font-medium cursor-pointer">
+          <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <span class="text-slate-500">保存本案勾稽進度以便下次繼續編輯：</span>
+            <div class="grid grid-cols-2 sm:flex gap-2">
+              <button onclick="exportContractorJSON()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-2 rounded-lg font-bold text-center">匯出備份 (.json)</button>
+              <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3 py-2 rounded-lg font-bold cursor-pointer text-center">
                 匯入備份
                 <input type="file" accept=".json" onchange="importContractorJSON(event)" class="hidden">
               </label>
@@ -803,13 +851,13 @@
        JavaScript 核心資料庫與互動邏輯
        ========================================================================= -->
   <script>
-    // 1. 四大階段流程展開細節資料 (區分業者端 vs 台電端參考)
+    // 1. 四大階段流程展開細節資料
     const FLOW_STAGE_DATA = {
       flow_1: {
         badge: '階段 1｜業者端應辦事項（附件二）',
         title: '用電設備設計資料送審：哪些案件要事先送審？要準備什麼？',
         content: `
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             <div class="bg-white p-3.5 rounded-lg border border-slate-200">
               <h5 class="font-bold text-sky-800 mb-1.5">📌 必須「事先將設計資料送台電審查訖後興工」之 7 種情形：</h5>
               <ol class="list-decimal list-inside space-y-1 text-slate-700 text-xs">
@@ -837,7 +885,7 @@
         badge: '階段 2｜業者端核心職責（要點五(一)(二)、附件三）',
         title: '完工後承裝業／監造者自主檢查與圖面數據填列',
         content: `
-          <div class="space-y-2 text-xs text-slate-700">
+          <div class="space-y-2 text-xs text-slate-700 bg-white p-3.5 rounded-lg border border-slate-200">
             <p>1. <strong>先自檢再報竣工：</strong>用戶用電設備裝設完竣後，負責施工之承裝業或監造者應先依【附件三】執行 9 大項自行檢查（絕緣測試、接地測試、試驗報告查對、開關及標識查對、管線查對、用途查對、安全距離、裝置契約入力容量測試、高壓斷路器保護電驛特性/跳脫/接線試驗）。</p>
             <p>2. <strong>測試結果填於單線系統圖：</strong>將自檢測試結果（包含於總開關測得之全系統絕緣電阻、各接地點之接地電阻值等）填列於單線系統圖之相關位置上，並於單線圖右下角加蓋「用戶、承裝業、監造者」三方簽章。</p>
             <p>3. <strong>備妥竣工試驗報告：</strong>送電前用電設備之竣工試驗報告，應由「中央主管機關或其認可之檢驗機構」、「登記合格之用電設備檢驗維護業」或「監造電機技師之執業機構或所屬機關」三者之一出具。</p>
@@ -848,7 +896,7 @@
         badge: '階段 3｜業者端核心職責（要點五、附件四、附件六）',
         title: '向台電區營業處提出竣工報告（各等級應附文件總整）',
         content: `
-          <div class="space-y-2 text-xs text-slate-700">
+          <div class="space-y-2 text-xs text-slate-700 bg-white p-3.5 rounded-lg border border-slate-200">
             <p>• <strong>低壓用戶：</strong>提送「竣工報告單（附件四表A）」＋「完整竣工圖面」（同格局多戶可加附續頁黏貼並蓋騎縫章）。</p>
             <p>• <strong>高壓用戶：</strong>提送「竣工報告單（附件四表B）」＋「完整竣工圖面」＋「高壓設備出廠與竣工試驗報告（清點1~9項張數）」＋「保護電驛三項試驗報告」。</p>
             <p>• <strong>特高壓用戶（自備變電所/汽電共生）：</strong>須於<strong>預定加入系統前 20 天</strong>完成報竣工！除表B與竣工圖外，須另檢附「自備變電所竣工檢查表（附件四表C）」及「附件六調度操作準則」之聲明書、各項試驗合格表、會驗申請書及送電要求書技術資料。</p>
@@ -860,7 +908,7 @@
         badge: '階段 4｜台電端作業流程說明（要點五(三)、六、附件七 — 僅供業者了解流程，不列入業者檢核表）',
         title: '台電收到竣工報告後的檢討、現場核對與送電／改修原則',
         content: `
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs text-slate-700">
             <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5">
               <h5 class="font-bold text-slate-800">🏢 1. 台電區處內部檢討與現場核對：</h5>
               <p>• 區營業處收到竣工報告後指派人員檢討。如符合規定，台電於單線圖左下角加蓋內部簽章欄（附件五）並派員現場檢驗。</p>
@@ -879,9 +927,6 @@
     };
 
     // 2. 業者專用「分級應備文件與自主檢查」架構式卡片資料庫
-    // 純粹包含「業者（承裝業/電機技師）」要準備或自檢的事項，不包含台電內部作業
-    // levels: ['lv', 'hv', 'ehv']
-    // opt: null | 'ev' | 'pe' | 'deviceContract' | 'multiHouse' | 'cogen'
     const CONTRACTOR_CARDS_DB = [
       // ==================== 第一類：共通圖面簽章與特殊條件必備文件 ====================
       {
@@ -953,7 +998,7 @@
         ]
       },
 
-      // ==================== 第二類：報竣工應檢附書面報告與證明文件（依低/高/特高壓分級） ====================
+      // ==================== 第二類：報竣工應檢附書面報告與證明文件 ====================
       {
         id: 'c_lv_formA',
         group: 'docs',
@@ -1025,7 +1070,7 @@
         ]
       },
 
-      // ==================== 第三類：現場自主檢查與測試要點（附件三、表A/B、表C） ====================
+      // ==================== 第三類：現場自主檢查與測試要點 ====================
       {
         id: 'c_self_9items',
         group: 'self',
@@ -1202,9 +1247,10 @@
     // 3. 系統狀態管理
     let contractorState = {
       currentTab: 'overview',
-      voltageLevel: 'hv', // 'lv' | 'hv' | 'ehv'
-      fontScale: 115, // 預設採用 115% 舒適大字，避免閱讀吃力
-      printFontSize: '12.5pt', // 列印預設舒適大字
+      voltageLevel: 'hv',
+      fontScale: window.innerWidth < 768 ? 103 : 115,
+      printFontSize: '12.5pt',
+      guideFilterText: '',
       options: {
         ev: true,
         pe: true,
@@ -1219,18 +1265,21 @@
         engineer: '林大華 電機技師 / 契約容量 1,200 kW',
         targetDate: getOffsetDateStr(28)
       },
-      // 記錄每張卡片的勾稽狀態、備註、是否展開細項、是否納入列印
       cardStates: {}
     };
+
+    function toggleFontDrawer() {
+      const el = document.getElementById('mobileFontDrawer');
+      if (el) el.classList.toggle('hidden');
+    }
 
     // 全站字體大小調整邏輯 (90% ~ 160%)
     function setFontScale(scaleVal, silent = false) {
       let scale = parseInt(scaleVal, 10);
-      if (isNaN(scale)) scale = 115;
+      if (isNaN(scale)) scale = 105;
       scale = Math.max(90, Math.min(160, scale));
       contractorState.fontScale = scale;
 
-      // 以 16px 為 100% 基準換算根字級
       const px = ((16 * scale) / 100).toFixed(2);
       document.documentElement.style.setProperty('--base-font-size', `${px}px`);
 
@@ -1239,11 +1288,10 @@
       const lbl = document.getElementById('fontScaleLabel');
       if (lbl) lbl.textContent = `${scale}%`;
 
-      // 更新預設按鈕高亮狀態
       [100, 115, 130, 145].forEach(preset => {
         const btn = document.getElementById(`fontBtn_${preset}`);
         if (!btn) return;
-        if (scale === preset) {
+        if (Math.abs(scale - preset) <= 3) {
           btn.className = 'px-2 py-1 rounded text-xs font-bold transition bg-amber-400 text-slate-950 shadow';
         } else {
           btn.className = 'px-2 py-1 rounded text-xs font-bold transition bg-slate-700 text-slate-200 hover:bg-slate-600';
@@ -1257,10 +1305,9 @@
     }
 
     function stepFontScale(delta) {
-      setFontScale((contractorState.fontScale || 115) + delta);
+      setFontScale((contractorState.fontScale || 105) + delta);
     }
 
-    // 列印專用字體大小調整
     function updatePrintFontSize(ptVal) {
       contractorState.printFontSize = ptVal;
       document.documentElement.style.setProperty('--print-font-size', ptVal);
@@ -1283,7 +1330,7 @@
       CONTRACTOR_CARDS_DB.forEach(c => {
         if (!contractorState.cardStates[c.id]) {
           contractorState.cardStates[c.id] = {
-            status: 'pending', // 'pending' | 'ok' | 'issue'
+            status: 'pending',
             note: '',
             expanded: false,
             print: true
@@ -1313,21 +1360,20 @@
       }
     }
 
-    // 浮動提示訊息 (取代 alert)
     function showToast(msg, type = 'info') {
       const box = document.getElementById('toastContainer');
       const el = document.createElement('div');
       const bg = type === 'success' ? 'bg-emerald-700 border-emerald-500' : 'bg-slate-800 border-slate-600';
-      el.className = `${bg} text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg border flex items-center gap-2 transition-all duration-300 pointer-events-auto`;
-      el.innerHTML = `<i class="fa-solid fa-circle-check text-amber-300"></i><span>${msg}</span>`;
+      el.className = `${bg} text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg border flex items-center gap-2 transition-all duration-300 pointer-events-auto max-w-full`;
+      el.innerHTML = `<i class="fa-solid fa-circle-check text-amber-300 shrink-0"></i><span class="truncate">${msg}</span>`;
       box.appendChild(el);
       setTimeout(() => {
         el.style.opacity = '0';
         setTimeout(() => el.remove(), 300);
-      }, 2800);
+      }, 2400);
     }
 
-    // 切換頂部四大分頁
+    // 切換頂部四大分頁（含手機端自動橫向置中）
     function switchTab(tab) {
       contractorState.currentTab = tab;
       const tabs = ['overview', 'guide', 'print', 'tools'];
@@ -1336,10 +1382,11 @@
         const btn = document.getElementById(`tabBtn_${t}`);
         if (t === tab) {
           section.classList.remove('hidden');
-          btn.className = 'tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2 bg-amber-400 text-slate-950 shadow-sm';
+          btn.className = 'tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 bg-amber-400 text-slate-950 shadow-sm';
+          btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         } else {
           section.classList.add('hidden');
-          btn.className = 'tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-2 text-slate-300 hover:bg-slate-700/60 hover:text-white';
+          btn.className = 'tab-btn shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-slate-300 hover:bg-slate-700/60 hover:text-white';
         }
       });
 
@@ -1361,20 +1408,20 @@
       const d = FLOW_STAGE_DATA[key];
       drawer.classList.remove('hidden');
       drawer.innerHTML = `
-        <div class="flex items-center justify-between border-b border-slate-200 pb-2.5 mb-3">
-          <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5 mb-3">
+          <div class="flex flex-wrap items-center gap-2">
             <span class="bg-sky-700 text-white text-xs font-bold px-2.5 py-0.5 rounded">${d.badge}</span>
             <h4 class="font-bold text-slate-900 text-sm sm:text-base">${d.title}</h4>
           </div>
-          <button onclick="document.getElementById('flowDetailDrawer').classList.add('hidden')" class="text-xs text-slate-500 hover:text-slate-800 px-2 py-1">
-            <i class="fa-solid fa-xmark mr-1"></i>收合細節
+          <button onclick="document.getElementById('flowDetailDrawer').classList.add('hidden')" class="text-xs font-bold text-slate-500 hover:text-slate-800 px-2.5 py-1 rounded bg-slate-200/70">
+            <i class="fa-solid fa-xmark mr-1"></i>收合
           </button>
         </div>
         ${d.content}
       `;
+      drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // 分頁1：展開/收合 4 大通則手風琴細節
     function toggleRuleAccordion(id) {
       const el = document.getElementById(id);
       if (el) {
@@ -1382,11 +1429,27 @@
       }
     }
 
-    // 分頁2：選擇電壓等級 (lv / hv / ehv)
+    // 分頁2：現場關鍵字快篩
+    function handleGuideFilter(val) {
+      contractorState.guideFilterText = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearGuideSearchBtn');
+      if (clearBtn) {
+        clearBtn.classList.toggle('hidden', !contractorState.guideFilterText);
+      }
+      renderContractorCards();
+    }
+
+    function clearGuideFilter() {
+      const inp = document.getElementById('guideSearchInput');
+      if (inp) inp.value = '';
+      contractorState.guideFilterText = '';
+      document.getElementById('clearGuideSearchBtn').classList.add('hidden');
+      renderContractorCards();
+    }
+
+    // 分頁2：選擇電壓等級
     function selectVoltageLevel(level) {
       contractorState.voltageLevel = level;
-
-      // 依電壓等級自動切換特高壓調度列印區塊
       document.getElementById('pSec_dispatch').checked = (level === 'ehv' || contractorState.options.cogen);
 
       updateVoltageLevelUI();
@@ -1399,7 +1462,7 @@
         hv: '高壓供電用戶（附件四表B）',
         ehv: '特高壓自備變電所／汽電共生（表B + 表C + 附件六）'
       };
-      showToast(`已切換至「${names[level]}」應備文件與自主檢查清單`);
+      showToast(`已切換：${names[level]}`);
     }
 
     function updateVoltageLevelUI() {
@@ -1407,13 +1470,12 @@
       levels.forEach(l => {
         const card = document.getElementById(`vCard_${l}`);
         if (l === contractorState.voltageLevel) {
-          card.className = 'text-left p-4 rounded-xl border-2 border-sky-600 bg-sky-50/70 shadow-sm transition';
+          card.className = 'text-left p-3.5 sm:p-4 rounded-xl border-2 border-sky-600 bg-sky-50/70 shadow-sm transition';
         } else {
-          card.className = 'text-left p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 transition';
+          card.className = 'text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 transition';
         }
       });
 
-      // 控制特定附加條件顯示與否
       document.getElementById('opt_multiHouse_wrap').style.display = (contractorState.voltageLevel === 'lv') ? 'flex' : 'none';
       document.getElementById('opt_cogen_wrap').style.display = (contractorState.voltageLevel !== 'lv') ? 'flex' : 'none';
 
@@ -1438,49 +1500,62 @@
       renderPrintDocument();
     }
 
-    // 判斷卡片是否適用於當前所選之電壓等級與附加條件
     function isCardApplicable(card) {
       if (!card.levels.includes(contractorState.voltageLevel)) return false;
       if (!card.opt) return true;
       return !!contractorState.options[card.opt];
     }
 
-    // 渲染分頁2：架構式應備文件與自主檢查卡片（細節預設收合，點擊才展開）
+    function matchesGuideFilter(card, kw) {
+      if (!kw) return true;
+      const hay = `${card.badge} ${card.title} ${card.summary} ${card.basis} ${card.subItems.join(' ')}`.toLowerCase();
+      return hay.includes(kw);
+    }
+
+    // 渲染分頁2：架構式應備文件與自主檢查卡片
     function renderContractorCards() {
       const container = document.getElementById('contractorCardsContainer');
+      const kw = contractorState.guideFilterText || '';
       const groups = [
-        { key: 'common', icon: 'fa-stamp', color: 'sky' },
-        { key: 'docs', icon: 'fa-folder-open', color: 'emerald' },
-        { key: 'self', icon: 'fa-clipboard-check', color: 'amber' },
-        { key: 'dispatch', icon: 'fa-tower-broadcast', color: 'purple' }
+        { key: 'common', icon: 'fa-stamp' },
+        { key: 'docs', icon: 'fa-folder-open' },
+        { key: 'self', icon: 'fa-clipboard-check' },
+        { key: 'dispatch', icon: 'fa-tower-broadcast' }
       ];
 
       let html = '';
       let totalCount = 0;
       let doneCount = 0;
+      let renderedCount = 0;
 
       groups.forEach(g => {
-        const cards = CONTRACTOR_CARDS_DB.filter(c => c.group === g.key && isCardApplicable(c));
+        const applicableCards = CONTRACTOR_CARDS_DB.filter(c => c.group === g.key && isCardApplicable(c));
+        applicableCards.forEach(c => {
+          totalCount++;
+          if ((contractorState.cardStates[c.id] || {}).status === 'ok') doneCount++;
+        });
+
+        const cards = applicableCards.filter(c => matchesGuideFilter(c, kw));
         if (cards.length === 0) return;
 
         const groupTitle = cards[0].groupTitle;
 
         html += `
           <div class="space-y-3">
-            <div class="flex items-center justify-between border-b-2 border-slate-200 pb-2">
-              <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+            <div class="flex flex-wrap items-center justify-between gap-1 border-b-2 border-slate-200 pb-2">
+              <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
                 <i class="fa-solid ${g.icon} text-sky-700"></i>
                 <span>${groupTitle}</span>
               </h3>
-              <span class="text-xs font-semibold text-slate-500">本區塊共 ${cards.length} 項重點</span>
+              <span class="text-xs font-semibold text-slate-500">共 ${cards.length} 項</span>
             </div>
             <div class="grid grid-cols-1 gap-3.5">
         `;
 
         cards.forEach(card => {
+          renderedCount++;
           const st = contractorState.cardStates[card.id] || { status: 'pending', note: '', expanded: false, print: true };
-          totalCount++;
-          if (st.status === 'ok') doneCount++;
+          const isExpanded = kw ? true : st.expanded;
 
           const borderClass = st.status === 'ok'
             ? 'border-emerald-500 bg-emerald-50/20'
@@ -1490,52 +1565,53 @@
 
           html += `
             <div class="rounded-xl border-2 ${borderClass} shadow-sm transition overflow-hidden">
-              <!-- 架構主卡片區（永遠顯示大綱） -->
-              <div class="p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div class="p-3.5 sm:p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 sm:gap-4">
                 <div class="space-y-1.5 flex-1">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-slate-800 text-white">${card.badge}</span>
+                  <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <span class="text-[11px] sm:text-xs font-bold px-2 py-0.5 rounded bg-slate-800 text-white">${card.badge}</span>
                     <h4 class="font-bold text-slate-900 text-sm sm:text-base">${card.title}</h4>
                   </div>
                   <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${card.summary}</p>
-                  <div class="flex flex-wrap items-center gap-4 pt-1">
-                    <button type="button" onclick="toggleCardDetail('${card.id}')" class="text-xs font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 px-3 py-1 rounded-lg border border-sky-200 transition">
-                      <i class="fa-solid ${st.expanded ? 'fa-chevron-up' : 'fa-list-ul'}"></i>
-                      <span>${st.expanded ? '收合細項清單' : `點此展開查看細項與法規要求 (${card.subItems.length} 項)`}</span>
+                  <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                    <button type="button" onclick="toggleCardDetail('${card.id}')" class="text-xs font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 px-3 py-1.5 rounded-lg border border-sky-200 transition">
+                      <i class="fa-solid ${isExpanded ? 'fa-chevron-up' : 'fa-list-ul'}"></i>
+                      <span>${isExpanded ? '收合細項清單' : `展開查看細項 (${card.subItems.length} 項)`}</span>
                     </button>
-                    <span class="text-[11px] text-slate-400">法源依據：${card.basis}</span>
+                    <span class="text-[11px] text-slate-400">法源：${card.basis}</span>
                   </div>
                 </div>
 
-                <!-- 右側：業者自主勾稽按鈕、備註與列印設定 -->
-                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
-                  <div class="inline-flex rounded-lg border border-slate-300 bg-white p-0.5">
-                    <button type="button" onclick="setCardStatus('${card.id}', 'ok')" class="px-3 py-1.5 rounded-md text-xs font-bold transition ${st.status === 'ok' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+                <!-- 右側：業者自主勾稽按鈕（手機端大熱區全寬排版） -->
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 shrink-0 pt-2.5 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+                  <div class="grid grid-cols-2 sm:inline-flex rounded-lg border border-slate-300 bg-white p-0.5">
+                    <button type="button" onclick="setCardStatus('${card.id}', 'ok')" class="px-3 py-2 sm:py-1.5 rounded-md text-xs font-bold transition text-center ${st.status === 'ok' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
                       ✓ 已備齊/合格
                     </button>
-                    <button type="button" onclick="setCardStatus('${card.id}', 'issue')" class="px-3 py-1.5 rounded-md text-xs font-bold transition ${st.status === 'issue' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+                    <button type="button" onclick="setCardStatus('${card.id}', 'issue')" class="px-3 py-2 sm:py-1.5 rounded-md text-xs font-bold transition text-center ${st.status === 'issue' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
                       ✗ 待補/待辦
                     </button>
                   </div>
 
-                  <input type="text" value="${escapeHtml(st.note)}" oninput="setCardNote('${card.id}', this.value)" placeholder="填寫實測數據或備註..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-600 outline-none w-full sm:w-48 bg-white">
+                  <div class="flex items-center gap-2">
+                    <input type="text" value="${escapeHtml(st.note)}" oninput="setCardNote('${card.id}', this.value)" placeholder="填寫實測數據或備註..." class="px-3 py-2 sm:py-1.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-600 outline-none flex-1 sm:w-44 bg-white">
 
-                  <label class="flex items-center gap-1 text-xs text-slate-600 cursor-pointer select-none px-2 py-1.5 rounded hover:bg-slate-100" title="勾選後納入列印勾稽表">
-                    <input type="checkbox" ${st.print ? 'checked' : ''} onchange="setCardPrint('${card.id}', this.checked)" class="rounded text-sky-700">
-                    <span>🖨️ 列印</span>
-                  </label>
+                    <label class="flex items-center gap-1 text-xs font-bold text-slate-600 cursor-pointer select-none px-2.5 py-2 sm:py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 shrink-0" title="勾選後納入列印勾稽表">
+                      <input type="checkbox" ${st.print ? 'checked' : ''} onchange="setCardPrint('${card.id}', this.checked)" class="rounded text-sky-700">
+                      <span>🖨️ 列印</span>
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <!-- 漸進式展開之細項清單 (預設隱藏，點擊後展開) -->
-              <div id="detail_${card.id}" class="${st.expanded ? '' : 'hidden'} bg-slate-50 border-t border-slate-200 px-5 py-4">
+              <!-- 漸進式展開之細項清單 -->
+              <div id="detail_${card.id}" class="${isExpanded ? '' : 'hidden'} bg-slate-50 border-t border-slate-200 px-3.5 sm:px-5 py-3.5 sm:py-4">
                 <div class="text-xs font-bold text-slate-700 mb-2 flex items-center justify-between">
-                  <span>📋 細項查核點與法規明細（可於列印中心設定是否一併印出細項）：</span>
-                  <button onclick="toggleCardDetail('${card.id}')" class="text-slate-500 hover:text-slate-800"><i class="fa-solid fa-xmark mr-1"></i>收合</button>
+                  <span>📋 細項查核點與法規明細：</span>
+                  <button onclick="toggleCardDetail('${card.id}')" class="text-slate-500 hover:text-slate-800 font-bold"><i class="fa-solid fa-xmark mr-1"></i>收合</button>
                 </div>
                 <ul class="space-y-1.5 text-xs text-slate-700 leading-relaxed">
                   ${card.subItems.map(sub => `
-                    <li class="flex items-start gap-2 bg-white p-2 rounded border border-slate-200/80">
+                    <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-slate-200/80">
                       <i class="fa-regular fa-square-check text-sky-700 mt-0.5 shrink-0"></i>
                       <span>${sub}</span>
                     </li>
@@ -1552,12 +1628,23 @@
         `;
       });
 
+      if (renderedCount === 0) {
+        html = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-2">
+            <i class="fa-solid fa-filter-circle-xmark text-3xl text-slate-400"></i>
+            <p class="font-bold text-slate-700 text-sm">目前電壓等級與篩選條件下無符合「${escapeHtml(kw)}」之項目</p>
+            <button onclick="clearGuideFilter()" class="text-xs font-bold text-sky-700 underline">清除關鍵字篩選</button>
+          </div>
+        `;
+      }
+
       container.innerHTML = html;
 
-      // 更新頂部進度條
       const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
       document.getElementById('headerProgressText').textContent = `${doneCount} / ${totalCount} 項 (${pct}%)`;
       document.getElementById('headerProgressBar').style.width = `${pct}%`;
+      const mProg = document.getElementById('mobileProgressText');
+      if (mProg) mProg.textContent = `勾稽 ${doneCount}/${totalCount} (${pct}%)`;
     }
 
     function toggleCardDetail(cardId) {
@@ -1645,7 +1732,6 @@
 
       let html = `
         <div class="space-y-4 text-black">
-          <!-- 表單標題 -->
           <div class="text-center border-b-2 border-black pb-2.5">
             <h1 class="text-lg sm:text-xl font-bold tracking-wide">新增設用戶用電設備「報竣工應備文件與自主檢查」業者勾稽表</h1>
             <p class="text-xs text-slate-700 mt-1">
@@ -1654,7 +1740,6 @@
           </div>
       `;
 
-      // 1. 工程基本資料表頭
       if (showHeader) {
         html += `
           <table class="w-full text-xs border-collapse border border-black print-table">
@@ -1676,7 +1761,6 @@
         `;
       }
 
-      // 2. 四大檢核區塊表格
       const secConfigs = [
         { enabled: showCommon, key: 'common', title: '壹、共通核心圖面與特殊條件必附文件檢核' },
         { enabled: showDocs, key: 'docs', title: '貳、報竣工應檢附書面報告與公會證明文件' },
@@ -1756,7 +1840,6 @@
         `;
       });
 
-      // 3. 業者專用三方簽章欄（移除台電內部核定欄，純供承裝業/技師/用戶確認）
       if (showSign) {
         html += `
           <div class="print-break-inside-avoid pt-2">
@@ -1775,8 +1858,8 @@
               </thead>
               <tbody>
                 <tr class="h-20">
-                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">檢查日期：　　年　　月　　日</td>
-                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">簽署日期：　　年　　月　　日</td>
+                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">檢查日期：  年  月  日</td>
+                  <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">簽署日期：  年  月  日</td>
                   <td class="border border-black align-bottom pb-1 text-[10px] text-slate-400">用印確認</td>
                 </tr>
               </tbody>
@@ -1787,7 +1870,11 @@
 
       html += `</div>`;
 
-      document.getElementById('printPreviewBox').innerHTML = html;
+      const previewBox = document.getElementById('printPreviewBox');
+      if (previewBox) {
+        previewBox.innerHTML = html;
+        previewBox.style.fontSize = contractorState.printFontSize || '12.5pt';
+      }
       document.getElementById('actualPrintContainer').innerHTML = html;
     }
 
@@ -1849,16 +1936,16 @@
         d.setDate(d.getDate() + s.offset);
         const ymd = d.toISOString().split('T')[0];
         return `
-          <div class="p-3 rounded-xl border ${s.highlight ? 'border-purple-300 bg-purple-50/50' : 'border-slate-200 bg-slate-50'} flex items-start justify-between gap-3">
+          <div class="p-3 rounded-xl border ${s.highlight ? 'border-purple-300 bg-purple-50/50' : 'border-slate-200 bg-slate-50'} flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-3">
             <div class="space-y-0.5">
-              <div class="flex items-center gap-2">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <span class="text-[11px] font-bold px-2 py-0.5 rounded ${s.highlight ? 'bg-purple-700 text-white' : 'bg-slate-600 text-white'}">${s.role}</span>
                 <span class="font-bold text-slate-900">${s.tag}</span>
               </div>
               <div class="font-semibold text-slate-800 pt-0.5">${s.title}</div>
               <p class="text-[11px] text-slate-500 leading-relaxed">${s.desc}</p>
             </div>
-            <div class="font-mono font-bold text-sm text-purple-950 bg-white px-2.5 py-1 rounded border border-purple-200 shrink-0">
+            <div class="font-mono font-bold text-sm text-purple-950 bg-white px-2.5 py-1 rounded border border-purple-200 shrink-0 text-center">
               ${ymd}
             </div>
           </div>
@@ -1907,7 +1994,6 @@
       }
     }
 
-    // 專案匯出與匯入
     function exportContractorJSON() {
       const str = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(contractorState, null, 2));
       const a = document.createElement('a');
@@ -1954,8 +2040,8 @@
       document.getElementById('pMeta_engineer').value = contractorState.meta.engineer || '';
       document.getElementById('toolTargetDate').value = contractorState.meta.targetDate || getOffsetDateStr(28);
 
-      // 同步字體大小與列印字級設定
-      setFontScale(contractorState.fontScale || 115, true);
+      const defaultScale = window.innerWidth < 768 ? 103 : 115;
+      setFontScale(contractorState.fontScale || defaultScale, true);
       if (contractorState.printFontSize) {
         document.documentElement.style.setProperty('--print-font-size', contractorState.printFontSize);
         const radios = document.querySelectorAll('input[name="printFontSize"]');
@@ -1976,7 +2062,6 @@
         .replace(/"/g, '&quot;');
     }
 
-    // 初始化啟動
     window.onload = function() {
       loadContractorStorage();
       syncStateToUI();
